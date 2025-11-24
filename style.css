@@ -5,15 +5,16 @@
 }
 
 body {
+  background-color: rosybrown;
   background-image: url("./assets/img/5_background/complete_background.png");
   background-position: left bottom;
-  background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 16px;
   padding-top: 42px;
 }
 
@@ -25,5 +26,6 @@ h1 {
 
 canvas {
   display: flex;
-  color: rosybrown;
+  background-color: rosybrown;
+  border: #000000 1px solid;
 }
