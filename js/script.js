@@ -1,5 +1,7 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let world = new World();
+let canvas;
+let world;
 
-function init() {}
+function init() {
+  let canvas = document.getElementById("canvas");
+  world = new World(canvas);
+}
