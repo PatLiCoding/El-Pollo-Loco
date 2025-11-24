@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("./assets/img/5_background/complete_background.png");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 42px;
+}
+
+h1 {
+  color: rgb(251, 249, 249);
+  font-size: 52px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+canvas {
+  display: flex;
+  color: rosybrown;
+}
