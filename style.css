@@ -6,7 +6,8 @@
 
 body {
   background-color: rosybrown;
-  background-image: url("./assets/img/5_background/complete_background.png");
+  background-image: linear-gradient(rgba(5, 5, 5, 0.5)),
+    url("./assets/img/5_background/complete_background.png");
   background-position: left bottom;
   background-size: cover;
   width: 100vw;
@@ -27,5 +28,13 @@ h1 {
 canvas {
   display: flex;
   background-color: rgb(8, 8, 8);
-  border: #000000 1px solid;
+  border: 2px solid transparent;
+  border-image: conic-gradient(
+      from 0deg,
+      rgb(80, 217, 248),
+      rgb(252, 51, 1),
+      rgb(244, 175, 54),
+      rgb(80, 217, 248)
+    )
+    1;
 }
