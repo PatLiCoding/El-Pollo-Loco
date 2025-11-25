@@ -26,6 +26,6 @@ h1 {
 
 canvas {
   display: flex;
-  background-color: rosybrown;
+  background-color: rgb(8, 8, 8);
   border: #000000 1px solid;
 }
