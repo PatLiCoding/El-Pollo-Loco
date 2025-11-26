@@ -1,6 +1,6 @@
 class Chicken extends MoveableObject {
   x = 120;
-  y = 370;
+  y = 360;
   img;
   height = 60;
   width = 40;
@@ -23,7 +23,10 @@ class Chicken extends MoveableObject {
   }
 
   animate() {
-    this.moveLeft();
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
+
     setInterval(() => {
       this.playAnimation(this.currentImage, this.IMAGES_WALKING);
     }, 100);
