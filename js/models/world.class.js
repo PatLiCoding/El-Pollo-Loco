@@ -46,7 +46,6 @@ class World {
         enemy.getRealFrame && enemy.getRealFrame();
 
         if (this.character.isColliding(enemy)) {
-          console.log("Collision with enemy!", enemy);
           this.character.hit();
         }
       });
