@@ -11,6 +11,13 @@ class Chicken extends MoveableObject {
   ];
   currentImage = 0;
 
+  rx;
+  ry;
+  rw;
+  rh;
+
+  offset = { top: 55, right: 40, bottom: 55, left: 40 };
+
   constructor() {
     super();
     this.loadImage(
@@ -20,6 +27,7 @@ class Chicken extends MoveableObject {
     this.x = 200 + Math.random() * 500;
     this.speed = 0.15 + Math.random() * 0.25;
     this.animate();
+    this.getRealFrame();
   }
 
   animate() {
@@ -30,5 +38,12 @@ class Chicken extends MoveableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 100);
+  }
+
+  getRealFrame() {
+    this.rx = this.x + this.offset.left;
+    this.ry = this.y + this.offset.top;
+    this.rw = this.w - this.offset.left - this.offset.right;
+    this.rh = this.h - this.offset.top - this.offset.bottom;
   }
 }

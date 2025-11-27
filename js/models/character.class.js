@@ -24,6 +24,18 @@ class Character extends MoveableObject {
   currentImage = 0;
   world;
 
+  x = 50;
+  y = 50;
+  w = 50;
+  h = 50;
+
+  rx;
+  ry;
+  rw;
+  rh;
+
+  offset = { top: 120, right: 20, bottom: 10, left: 20 };
+
   constructor() {
     super();
     this.loadImage("./assets/img/2_character_pepe/2_walk/W-21.png");
@@ -31,6 +43,14 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_JUMPING);
     this.animate();
     this.applyGravity();
+    this.getRealFrame();
+  }
+
+  getRealFrame() {
+    this.rx = this.x + this.offset.left;
+    this.ry = this.y + this.offset.top;
+    this.rw = this.w - this.offset.left - this.offset.right;
+    this.rh = this.h - this.offset.top - this.offset.bottom;
   }
 
   animate() {

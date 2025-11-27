@@ -15,18 +15,32 @@ class Endboss extends MoveableObject {
   ];
   currentImage = 0;
 
+  rx;
+  ry;
+  rw;
+  rh;
+
+  offset = { top: 60, right: 40, bottom: 15, left: 15 };
+
   constructor() {
     super();
     this.loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
     this.x = 2000;
-
     this.animate();
+    this.getRealFrame();
   }
 
   animate() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 200);
+  }
+
+  getRealFrame() {
+    this.rx = this.x + this.offset.left;
+    this.ry = this.y + this.offset.top;
+    this.rw = this.w - this.offset.left - this.offset.right;
+    this.rh = this.h - this.offset.top - this.offset.bottom;
   }
 }
