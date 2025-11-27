@@ -74,16 +74,16 @@ class MoveableObject {
   }
 
   hit() {
-    this.energy -= 5;
+    this.energy -= 10;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime;
+      this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime - this.lastHit;
+    let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
     return timepassed < 1;
   }

@@ -38,7 +38,13 @@ class World {
 
   checkCollisions() {
     setInterval(() => {
+      if (!this.character) return;
+      this.character.getRealFrame && this.character.getRealFrame();
+
+      if (!this.level || !Array.isArray(this.level.enemies)) return;
       this.level.enemies.forEach((enemy) => {
+        enemy.getRealFrame && enemy.getRealFrame();
+
         if (this.character.isColliding(enemy)) {
           console.log("Collision with enemy!", enemy);
           this.character.hit();
@@ -46,6 +52,17 @@ class World {
       });
     }, 200);
   }
+
+  // checkCollisions() {
+  //   setInterval(() => {
+  //     this.level.enemies.forEach((enemy) => {
+  //       if (this.character.isColliding(enemy)) {
+  //         console.log("Collision with enemy!", enemy);
+  //         this.character.hit();
+  //       }
+  //     });
+  //   }, 200);
+  // }
 
   addObjectToMap(objects) {
     objects.forEach((o) => {

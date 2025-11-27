@@ -38,11 +38,6 @@ class Character extends MoveableObject {
   currentImage = 0;
   world;
 
-  x = 50;
-  y = 50;
-  w = 50;
-  h = 50;
-
   rx;
   ry;
   rw;
@@ -65,8 +60,8 @@ class Character extends MoveableObject {
   getRealFrame() {
     this.rx = this.x + this.offset.left;
     this.ry = this.y + this.offset.top;
-    this.rw = this.w - this.offset.left - this.offset.right;
-    this.rh = this.h - this.offset.top - this.offset.bottom;
+    this.rw = this.width - this.offset.left - this.offset.right;
+    this.rh = this.height - this.offset.top - this.offset.bottom;
   }
 
   animate() {
@@ -93,7 +88,7 @@ class Character extends MoveableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
-      } else if (this.isHurt) {
+      } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
