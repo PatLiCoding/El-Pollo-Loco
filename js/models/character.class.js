@@ -1,5 +1,5 @@
 class Character extends MoveableObject {
-  y = 80;
+  y = 140;
   height = 300;
   speed = 10;
   IMAGES_WALKING = [
@@ -56,11 +56,11 @@ class Character extends MoveableObject {
 
     setInterval(() => {
       if (this.isAboveGround()) {
-        this.playAnimation(this.currentImage, this.IMAGES_JUMPING);
+        this.playAnimation(this.IMAGES_JUMPING);
       }
 
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.playAnimation(this.currentImage, this.IMAGES_WALKING);
+        this.playAnimation(this.IMAGES_WALKING);
       }
     }, 50);
   }
