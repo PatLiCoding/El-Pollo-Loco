@@ -41,9 +41,10 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           console.log("Collision with enemy!", enemy);
+          this.character.hit();
         }
       });
-    }, 1000);
+    }, 200);
   }
 
   addObjectToMap(objects) {
