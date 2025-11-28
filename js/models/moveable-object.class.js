@@ -19,24 +19,6 @@ class MoveableObject extends DrawableObject {
     return this.y < 120;
   }
 
-  drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof Chicken ||
-      this instanceof Endboss
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "1";
-      ctx.strokeStyle = "blue";
-      ctx.rect(
-        this.x + this.offset.left,
-        this.y + this.offset.top,
-        this.width - this.offset.left - this.offset.right,
-        this.height - this.offset.top - this.offset.bottom
-      );
-      ctx.stroke();
-    }
-  }
   isColliding(mo) {
     return (
       this.rx + this.rw > mo.rx &&
@@ -47,7 +29,7 @@ class MoveableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 10;
+    this.energy -= 20;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -57,7 +39,7 @@ class MoveableObject extends DrawableObject {
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;
+    timepassed = timepassed / 2000;
     return timepassed < 1;
   }
 
