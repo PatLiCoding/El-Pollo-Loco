@@ -76,5 +76,6 @@ const level1 = new Level(
     new Bottle("assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
     new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
     new Bottle("assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
-  ]
+  ],
+  [new Coins(), new Coins(), new Coins()]
 );
