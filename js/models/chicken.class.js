@@ -41,11 +41,4 @@ class Chicken extends MoveableObject {
       this.playAnimation(this.IMAGES_WALKING);
     }, 100);
   }
-
-  getRealFrame() {
-    this.rx = this.x + this.offset.left;
-    this.ry = this.y + this.offset.top;
-    this.rw = this.w + this.offset.left + this.offset.right;
-    this.rh = this.h + this.offset.top + this.offset.bottom;
-  }
 }
