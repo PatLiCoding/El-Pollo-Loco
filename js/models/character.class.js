@@ -1,5 +1,8 @@
 class Character extends MoveableObject {
+  x = 60;
   y = 140;
+  w = 60;
+  h = 60;
   height = 300;
   speed = 10;
   IMAGES_WALKING = [
@@ -60,8 +63,8 @@ class Character extends MoveableObject {
   getRealFrame() {
     this.rx = this.x + this.offset.left;
     this.ry = this.y + this.offset.top;
-    this.rw = this.width - this.offset.left - this.offset.right;
-    this.rh = this.height - this.offset.top - this.offset.bottom;
+    this.rw = this.w + this.offset.left + this.offset.right;
+    this.rh = this.h + this.offset.top + this.offset.bottom;
   }
 
   animate() {
