@@ -20,7 +20,7 @@ class Endboss extends MoveableObject {
   rw;
   rh;
 
-  offset = { top: 60, right: 40, bottom: 15, left: 15 };
+  offset = { top: 50, right: 25, bottom: 40, left: 25 };
 
   constructor() {
     super();

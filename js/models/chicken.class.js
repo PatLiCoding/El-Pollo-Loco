@@ -16,7 +16,7 @@ class Chicken extends MoveableObject {
   rw;
   rh;
 
-  offset = { top: 55, right: 40, bottom: 55, left: 40 };
+  offset = { top: 10, right: 5, bottom: 10, left: 5 };
 
   constructor() {
     super();
