@@ -44,7 +44,7 @@ class Character extends MoveableObject {
   rw;
   rh;
 
-  offset = { top: 120, right: 20, bottom: 10, left: 20 };
+  offset = { top: 120, right: 28, bottom: 10, left: 20 };
 
   constructor() {
     super();

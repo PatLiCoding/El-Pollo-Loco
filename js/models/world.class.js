@@ -31,6 +31,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectToMap(this.level.backgroundObjects);
+    this.addObjectToMap(this.level.clouds);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addObjectToMap(this.statusBar);
@@ -42,7 +43,6 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
-    this.addObjectToMap(this.level.clouds);
     this.addToMap(this.character);
     this.addObjectToMap(this.level.enemies);
     this.addObjectToMap(this.level.bottle);
