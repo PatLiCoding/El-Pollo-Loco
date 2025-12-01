@@ -7,6 +7,7 @@ class World {
   camera_x = 0;
   statusBar = [new StatusBarHealth(), new StatusBarBottle()];
   throwableObjects = [];
+  lastKeyD = false;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -64,28 +65,36 @@ class World {
         this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);
       }
     });
+
+    this.level.bottle.forEach((bottle) => {
+      bottle.getRealFrame();
+
+      if (this.character.isColliding(bottle)) {
+        if (this.statusBar[1].percentage < 100) {
+          this.statusBar[1].setPercentage(this.statusBar[1].percentage + 20);
+        }
+      }
+    });
   }
 
   checkThrowObjects() {
-    if (this.keyboard.D) {
+    if (
+      this.keyboard.D &&
+      !this.lastKeyD &&
+      this.statusBar[1].percentage >= 20
+    ) {
+      this.lastKeyD = true;
       let bottle = new ThrowableObject(
         this.character.x + 50,
         this.character.y + 120
       );
       this.throwableObjects.push(bottle);
+      this.statusBar[1].setPercentage(this.statusBar[1].percentage - 20);
+    }
+    if (!this.keyboard.D) {
+      this.lastKeyD = false;
     }
   }
-
-  // checkCollisions() {
-  //   setInterval(() => {
-  //     this.level.enemies.forEach((enemy) => {
-  //       if (this.character.isColliding(enemy)) {
-  //         console.log("Collision with enemy!", enemy);
-  //         this.character.hit();
-  //       }
-  //     });
-  //   }, 200);
-  // }
 
   addObjectToMap(objects) {
     objects.forEach((o) => {
