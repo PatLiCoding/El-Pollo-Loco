@@ -39,12 +39,37 @@ class DrawableObject {
       ctx.lineWidth = "1";
       ctx.strokeStyle = "blue";
       ctx.rect(
-        this.x + this.offset.left,
-        this.y + this.offset.top,
-        this.width - this.offset.left - this.offset.right,
-        this.height - this.offset.top - this.offset.bottom
+        this.rx,
+        this.ry,
+        this.rw,
+        this.rh
+        // this.x + this.offset.left,
+        // this.y + this.offset.top,
+        // this.width - this.offset.left - this.offset.right,
+        // this.height - this.offset.top - this.offset.bottom
       );
       ctx.stroke();
+    }
+  }
+  setPercentage(percentage) {
+    this.percentage = percentage;
+    let imagePath = this.IMAGES[this.resolveImageIndex()];
+    this.img = this.imageCache[imagePath];
+  }
+
+  resolveImageIndex() {
+    if (this.percentage == 100) {
+      return 5;
+    } else if (this.percentage == 80) {
+      return 4;
+    } else if (this.percentage == 60) {
+      return 3;
+    } else if (this.percentage == 40) {
+      return 2;
+    } else if (this.percentage == 20) {
+      return 1;
+    } else {
+      return 0;
     }
   }
 }

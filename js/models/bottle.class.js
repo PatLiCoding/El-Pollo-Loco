@@ -9,11 +9,12 @@ class Bottle extends MoveableObject {
   rw;
   rh;
 
-  offset = { top: 55, right: 40, bottom: 50, left: 40 };
+  offset = { top: 55, right: 38, bottom: 50, left: 38 };
 
   constructor(imagePath) {
     super();
     this.loadImage(imagePath);
     this.x = 200 + Math.random() * 1500;
+    this.getRealFrame();
   }
 }
