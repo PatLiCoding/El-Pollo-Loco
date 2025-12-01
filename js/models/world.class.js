@@ -70,10 +70,14 @@ class World {
   checkCollisions() {
     this.character.getRealFrame();
 
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy, index) => {
       enemy.getRealFrame();
 
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isJumpOn(enemy)) {
+        console.log("Charakter springt auf Huhn!");
+        this.level.enemies.splice(index, 1);
+        this.character.speedY = 25;
+      } else if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);
       }
@@ -98,6 +102,8 @@ class World {
         this.level.coins.splice(index, 1);
       }
     });
+
+    this.character.updateLastBottom();
   }
 
   checkThrowObjects() {

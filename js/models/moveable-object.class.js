@@ -5,6 +5,7 @@ class MoveableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
+  lastBottom = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -76,5 +77,18 @@ class MoveableObject extends DrawableObject {
 
   jump() {
     this.speedY = 30;
+  }
+
+  updateLastBottom() {
+    this.lastBottom = this.ry + this.rh;
+  }
+
+  isJumpOn(mo) {
+    const touching = this.isColliding(mo);
+    const charBottom = this.ry + this.rh;
+    const moTop = mo.ry;
+    const fromAbove = this.lastBottom <= moTop && charBottom >= moTop;
+
+    return touching && fromAbove;
   }
 }
