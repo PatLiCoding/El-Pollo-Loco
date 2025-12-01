@@ -5,7 +5,11 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = [new StatusBarHealth(), new StatusBarBottle()];
+  statusBar = [
+    new StatusBarHealth(),
+    new StatusBarBottle(),
+    new StatusBarBoss(),
+  ];
   throwableObjects = [];
   lastKeyD = false;
   coinImage = new Image();
