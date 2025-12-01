@@ -8,11 +8,14 @@ class World {
   statusBar = [new StatusBarHealth(), new StatusBarBottle()];
   throwableObjects = [];
   lastKeyD = false;
+  coinImage = new Image();
+  coinsCollected = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.coinImage.src = "assets/img/8_coin/coin_2.png";
     this.draw();
     this.setWorld();
     this.run();
@@ -27,6 +30,12 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     this.addObjectToMap(this.statusBar);
+
+    this.ctx.font = "26px Arial";
+    this.ctx.fillStyle = "white";
+    this.ctx.drawImage(this.coinImage, 5, 75, 75, 75);
+    this.ctx.fillText("x " + this.coinsCollected, 65, 120);
+
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectToMap(this.level.clouds);
@@ -73,6 +82,14 @@ class World {
         if (this.statusBar[1].percentage < 100) {
           this.statusBar[1].setPercentage(this.statusBar[1].percentage + 20);
         }
+      }
+    });
+
+    this.level.coins.forEach((coins) => {
+      coins.getRealFrame();
+
+      if (this.character.isColliding(coins)) {
+        this.coinsCollected++;
       }
     });
   }
