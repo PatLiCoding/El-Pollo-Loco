@@ -79,21 +79,23 @@ class World {
       }
     });
 
-    this.level.bottle.forEach((bottle) => {
+    this.level.bottle.forEach((bottle, index) => {
       bottle.getRealFrame();
 
       if (this.character.isColliding(bottle)) {
         if (this.statusBar[1].percentage < 100) {
           this.statusBar[1].setPercentage(this.statusBar[1].percentage + 20);
+          this.level.bottle.splice(index, 1);
         }
       }
     });
 
-    this.level.coins.forEach((coins) => {
+    this.level.coins.forEach((coins, index) => {
       coins.getRealFrame();
 
       if (this.character.isColliding(coins)) {
         this.coinsCollected++;
+        this.level.coins.splice(index, 1);
       }
     });
   }
