@@ -14,6 +14,7 @@ class World {
   lastKeyD = false;
   coinImage = new Image();
   coinsCollected = 0;
+  deadEnemies = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -43,6 +44,7 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
+    this.addObjectToMap(this.deadEnemies);
     this.addToMap(this.character);
     this.addObjectToMap(this.level.enemies);
     this.addObjectToMap(this.level.bottle);
@@ -74,7 +76,7 @@ class World {
       enemy.getRealFrame();
 
       if (this.character.isJumpOn(enemy)) {
-        console.log("Charakter springt auf Huhn!");
+        this.isKilled(enemy);
         this.level.enemies.splice(index, 1);
         this.character.speedY = 25;
       } else if (this.character.isColliding(enemy)) {
@@ -154,5 +156,17 @@ class World {
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
+  }
+
+  isKilled(enemy) {
+    const dead = new DrawableObject();
+    dead.loadImage(
+      "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+    );
+    dead.x = enemy.x;
+    dead.y = enemy.y;
+    dead.width = enemy.width;
+    dead.height = enemy.height;
+    this.deadEnemies.push(dead);
   }
 }

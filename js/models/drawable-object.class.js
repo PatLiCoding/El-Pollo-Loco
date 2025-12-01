@@ -24,6 +24,9 @@ class DrawableObject {
   }
 
   draw(ctx) {
+    if (this.img instanceof HTMLImageElement) {
+      if (this.img.naturalWidth === 0) return;
+    }
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
@@ -38,16 +41,7 @@ class DrawableObject {
       ctx.beginPath();
       ctx.lineWidth = "1";
       ctx.strokeStyle = "blue";
-      ctx.rect(
-        this.rx,
-        this.ry,
-        this.rw,
-        this.rh
-        // this.x + this.offset.left,
-        // this.y + this.offset.top,
-        // this.width - this.offset.left - this.offset.right,
-        // this.height - this.offset.top - this.offset.bottom
-      );
+      ctx.rect(this.rx, this.ry, this.rw, this.rh);
       ctx.stroke();
     }
   }
