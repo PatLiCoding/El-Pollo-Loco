@@ -25,7 +25,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    // AudioHub.playOne(AudioHub.GAMESOUND);
+    AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   draw() {
@@ -84,12 +84,12 @@ class World {
         }
       });
     }, 1000 / 60);
-    // setInterval(() => {
-    //   setTimeout(() => {
-    //     AudioHub.GAMESOUND.loop = true;
-    //     AudioHub.playOne(AudioHub.GAMESOUND);
-    //   }, 50);
-    // }, 8000);
+    setInterval(() => {
+      setTimeout(() => {
+        AudioHub.GAMESOUND.loop = true;
+        AudioHub.playOne(AudioHub.GAMESOUND);
+      }, 50);
+    }, 8000);
   }
 
   checkCollisions() {
@@ -106,6 +106,7 @@ class World {
       } else if (this.character.isColliding(enemy) && enemy.isBoss) {
         enemy.isAttack = true;
         enemy.currentImage = 0;
+        AudioHub.playOne(AudioHub.ENEMY_BOSS_ATTACK);
         this.character.hit();
         this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);
       } else if (this.character.isColliding(enemy)) {
@@ -119,6 +120,7 @@ class World {
 
       if (this.character.isColliding(bottle)) {
         if (this.statusBar[1].percentage < 100) {
+          AudioHub.playOne(AudioHub.BOTTLE_COLLECT);
           this.statusBar[1].setPercentage(this.statusBar[1].percentage + 20);
           this.level.bottle.splice(index, 1);
         }
@@ -130,6 +132,7 @@ class World {
 
       if (this.character.isColliding(coins)) {
         this.coinsCollected++;
+        AudioHub.playOne(AudioHub.COIN);
         this.level.coins.splice(index, 1);
       }
     });
@@ -164,18 +167,22 @@ class World {
         enemy.getRealFrame();
 
         if (this.isBottleHitEnemy(bottle, enemy)) {
+          AudioHub.playOne(AudioHub.BOTTLE_SMASH);
           AudioHub.playOne(AudioHub.ENEMY_HURT);
 
           if (enemy.isBoss) {
+            AudioHub.playOne(AudioHub.BOTTLE_SMASH);
             enemy.energy -= 20;
             this.statusBar[2].setPercentage(enemy.energy);
 
             if (enemy.energy > 0) {
               enemy.isHurt = true;
               enemy.currentImage = 0;
+              AudioHub.playOne(AudioHub.ENEMY_BOSS_ATTACK);
             } else {
               enemy.isDead = true;
               enemy.currentImage = 0;
+              AudioHub.playOne(AudioHub.ENEMY_BOSS_DEAD);
               setTimeout(() => {
                 this.killedBoss(enemy);
                 this.level.enemies.splice(enemyIndex, 1);
