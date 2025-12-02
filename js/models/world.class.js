@@ -16,7 +16,7 @@ class World {
   coinsCollected = 0;
   deadEnemies = [];
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, gamesound) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -24,6 +24,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   draw() {
@@ -79,6 +80,7 @@ class World {
         this.isKilled(enemy);
         this.level.enemies.splice(index, 1);
         this.character.speedY = 25;
+        AudioHub.playOne(AudioHub.ENEMY_HURT);
       } else if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);

@@ -42,6 +42,7 @@ class MoveableObject extends DrawableObject {
 
   hit() {
     this.energy -= 20;
+    AudioHub.playOne(AudioHub.PEPE_HURT);
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -77,6 +78,7 @@ class MoveableObject extends DrawableObject {
 
   jump() {
     this.speedY = 30;
+    AudioHub.playOne(AudioHub.PEPE_JUMP);
   }
 
   updateLastBottom() {
