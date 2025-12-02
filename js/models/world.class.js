@@ -88,6 +88,11 @@ class World {
         this.level.enemies.splice(index, 1);
         this.character.speedY = 25;
         AudioHub.playOne(AudioHub.ENEMY_HURT);
+      } else if (this.character.isColliding(enemy) && enemy.isBoss) {
+        enemy.isAttack = true;
+        enemy.currentImage = 0;
+        this.character.hit();
+        this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);
       } else if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.statusBar[0].percentage - 20);
@@ -213,8 +218,6 @@ class World {
     dead.height = enemy.height;
     this.deadEnemies.push(dead);
   }
-
-  isBossHurt() {}
 
   killedBoss(enemy) {
     const dead = new DrawableObject();
