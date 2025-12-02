@@ -19,7 +19,7 @@ class AudioHub {
       sound.currentTime = 0;
       sound.play();
     } else {
-      console.log("Sound not ready");
+      return;
     }
   }
 

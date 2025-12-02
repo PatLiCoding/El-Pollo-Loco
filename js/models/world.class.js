@@ -67,7 +67,14 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
+      this.checkBottle();
     }, 200);
+    // setInterval(() => {
+    //   setTimeout(() => {
+    //     AudioHub.GAMESOUND.loop = true;
+    //     AudioHub.playOne(AudioHub.GAMESOUND);
+    //   }, 50);
+    // }, 8000);
   }
 
   checkCollisions() {
@@ -129,6 +136,41 @@ class World {
     }
   }
 
+  checkBottle() {
+    this.throwableObjects.forEach((bottle, bottleIndex) => {
+      bottle.getRealFrame();
+
+      this.level.enemies.forEach((enemy, enemyIndex) => {
+        enemy.getRealFrame();
+
+        if (this.isBottleHitEnemy(bottle, enemy)) {
+          AudioHub.playOne(AudioHub.ENEMY_HURT);
+
+          if (enemy.isBoss) {
+            enemy.energy -= 20;
+            this.statusBar[2].setPercentage(enemy.energy);
+
+            if (enemy.energy > 0) {
+              enemy.isHurt = true;
+              enemy.currentImage = 0;
+            } else {
+              enemy.isDead = true;
+              enemy.currentImage = 0;
+              setTimeout(() => {
+                this.killedBoss(enemy);
+                this.level.enemies.splice(enemyIndex, 1);
+              }, enemy.IMAGES_DEAD.length * 200);
+            }
+          } else {
+            this.isKilled(enemy);
+            this.level.enemies.splice(enemyIndex, 1);
+          }
+          this.throwableObjects.splice(bottleIndex, 1);
+        }
+      });
+    });
+  }
+
   addObjectToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
@@ -170,5 +212,26 @@ class World {
     dead.width = enemy.width;
     dead.height = enemy.height;
     this.deadEnemies.push(dead);
+  }
+
+  isBossHurt() {}
+
+  killedBoss(enemy) {
+    const dead = new DrawableObject();
+    dead.loadImage("assets/img/4_enemie_boss_chicken/5_dead/G26.png");
+    dead.x = enemy.x;
+    dead.y = enemy.y;
+    dead.width = enemy.width;
+    dead.height = enemy.height;
+    this.deadEnemies.push(dead);
+  }
+
+  isBottleHitEnemy(bottle, enemy) {
+    return (
+      bottle.x + bottle.width > enemy.x &&
+      bottle.x < enemy.x + enemy.width &&
+      bottle.y + bottle.height > enemy.y &&
+      bottle.y < enemy.y + enemy.height
+    );
   }
 }
