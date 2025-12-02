@@ -47,6 +47,7 @@ class MoveableObject extends DrawableObject {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
+      this.lastActionTime = new Date().getTime();
     }
   }
 

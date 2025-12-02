@@ -25,7 +25,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    AudioHub.playOne(AudioHub.GAMESOUND);
+    // AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   draw() {
@@ -84,12 +84,12 @@ class World {
         }
       });
     }, 1000 / 60);
-    setInterval(() => {
-      setTimeout(() => {
-        AudioHub.GAMESOUND.loop = true;
-        AudioHub.playOne(AudioHub.GAMESOUND);
-      }, 50);
-    }, 8000);
+    // setInterval(() => {
+    //   setTimeout(() => {
+    //     AudioHub.GAMESOUND.loop = true;
+    //     AudioHub.playOne(AudioHub.GAMESOUND);
+    //   }, 50);
+    // }, 8000);
   }
 
   checkCollisions() {

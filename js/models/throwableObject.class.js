@@ -1,5 +1,5 @@
 class ThrowableObject extends MoveableObject {
-  offset = { top: 0, right: 0, bottom: 0, left: 0 };
+  offset = { top: 10, right: 10, bottom: 10, left: 10 };
 
   constructor(x, y) {
     super().loadImage("assets/img/6_salsa_bottle/salsa_bottle.png");
@@ -8,6 +8,7 @@ class ThrowableObject extends MoveableObject {
     this.height = 60;
     this.width = 50;
     this.throw();
+    this.getRealFrame();
   }
 
   throw() {
