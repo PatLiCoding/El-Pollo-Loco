@@ -15,6 +15,7 @@ class World {
   coinImage = new Image();
   coinsCollected = 0;
   deadEnemies = [];
+  bossTriggered = false;
 
   constructor(canvas, keyboard, gamesound) {
     this.ctx = canvas.getContext("2d");
@@ -24,7 +25,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    AudioHub.playOne(AudioHub.GAMESOUND);
+    // AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   draw() {
@@ -69,6 +70,20 @@ class World {
       this.checkThrowObjects();
       this.checkBottle();
     }, 200);
+    setInterval(() => {
+      this.level.enemies.forEach((enemy) => {
+        if (enemy.isBoss && !enemy.isDead) {
+          if (!this.bossTriggered && this.character.x >= 1500) {
+            this.bossTriggered = true;
+          }
+          if (this.bossTriggered) {
+            if (enemy.x > 0) {
+              enemy.moveLeft();
+            }
+          }
+        }
+      });
+    }, 1000 / 60);
     // setInterval(() => {
     //   setTimeout(() => {
     //     AudioHub.GAMESOUND.loop = true;

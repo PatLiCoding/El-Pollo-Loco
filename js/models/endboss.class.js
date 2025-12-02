@@ -6,6 +6,7 @@ class Endboss extends MoveableObject {
   isHurt = false;
   isDead = false;
   isAttack = false;
+  speed = 2;
 
   IMAGES_WALKING = [
     "./assets/img/4_enemie_boss_chicken/2_alert/G5.png",
