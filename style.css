@@ -25,9 +25,13 @@ h1 {
   text-shadow: 2px 2px 4px #000000;
 }
 
-canvas {
-  display: flex;
-  background-color: rgb(8, 8, 8);
+h3 {
+  font-size: 32px;
+  color: rgb(251, 249, 249);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+#gameSection {
   border: 2px solid transparent;
   border-image: conic-gradient(
       from 0deg,
@@ -37,4 +41,120 @@ canvas {
       rgb(80, 217, 248)
     )
     1;
+  height: 480px;
+  width: 720px;
+  position: relative;
+  overflow: hidden;
+}
+
+canvas {
+  display: none;
+  background-color: rgb(8, 8, 8);
+  position: absolute;
+  z-index: -1;
+}
+
+#startContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 480px;
+  width: 720px;
+  background-image: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+#controllsContainer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  height: 480px;
+  width: 720px;
+  padding-top: 32px;
+  background-image: url("assets/img/5_background/first_half_background.png");
+  background-color: rgb(134, 207, 235);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+table {
+  color: rgb(251, 249, 249);
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 20px;
+  width: 350px;
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+td {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+  width: 100%;
+}
+
+#winContainer {
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 16px;
+  height: 480px;
+  width: 720px;
+  background-image: url("./assets/img/You won, you lost/You Win A.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+#loseContainer {
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 16px;
+  height: 480px;
+  width: 720px;
+  background-image: url("assets/img/9_intro_outro_screens/game_over/you lost.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.navBtn {
+  font-size: 20px;
+  padding: 16px 16px;
+  color: aliceblue;
+  text-shadow: 2px 2px 4px #000000;
+  background-color: rgb(245, 182, 93, 0.8);
+  border-radius: 25px;
+  border: none;
+  transition: all 125ms ease-in;
+  width: 10rem;
+}
+
+.navBtn:hover {
+  background-color: rgb(247, 70, 70);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.controllBtn {
+  background-color: white;
+  padding: 2px 4px;
+  text-align: center;
+  color: #000000;
+  width: 6rem;
+  border-radius: 15px;
 }

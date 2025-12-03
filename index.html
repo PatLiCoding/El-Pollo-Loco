@@ -33,6 +33,49 @@
   </head>
   <body onload="init()">
     <h1>El Pollo Loco</h1>
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <section id="gameSection">
+      <div id="startContainer">
+        <button class="navBtn">START</button>
+        <button class="navBtn">CONTROLS</button>
+      </div>
+
+      <div id="controllsContainer">
+        <h3>Controlls</h3>
+        <table>
+          <tr>
+            <td>
+              <button class="controllBtn" disabled>Left Arrow</button>/
+              <button class="controllBtn" disabled>Right Arrow</button>
+            </td>
+            <td>MOVE</td>
+          </tr>
+          <tr>
+            <td>
+              <button class="controllBtn" disabled>SPACE</button>/
+              <button class="controllBtn" disabled>Up Arrow</button>
+            </td>
+            <td>JUMP</td>
+          </tr>
+          <tr>
+            <td>
+              <button class="controllBtn" disabled>D</button>
+            </td>
+            <td>Throw Bottle</td>
+          </tr>
+        </table>
+
+        <button class="navBtn">MENU</button>
+      </div>
+
+      <div id="winContainer">
+        <button class="navBtn">TRY AGAIN</button>
+      </div>
+
+      <div id="loseContainer">
+        <button class="navBtn">TRY AGAIN</button>
+      </div>
+
+      <canvas id="canvas" width="720" height="480"> </canvas>
+    </section>
   </body>
 </html>
