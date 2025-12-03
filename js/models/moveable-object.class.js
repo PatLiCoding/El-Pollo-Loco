@@ -45,6 +45,7 @@ class MoveableObject extends DrawableObject {
     AudioHub.playOne(AudioHub.PEPE_HURT);
     if (this.energy < 0) {
       this.energy = 0;
+      showLoseScreen();
     } else {
       this.lastHit = new Date().getTime();
       this.lastActionTime = new Date().getTime();

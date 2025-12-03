@@ -1,11 +1,12 @@
-let canvas;
 let world;
 let keyboard = new Keyboard();
+let canvas = document.getElementById("canvas");
+let startScreen = document.getElementById("startContainer");
+let controllSreen = document.getElementById("controllsContainer");
+let loseScreen = document.getElementById("loseContainer");
+let winScreen = document.getElementById("winContainer");
 
-function init() {
-  canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard);
-}
+function init() {}
 
 window.addEventListener("keydown", (event) => {
   if (event.keyCode == 39) {
@@ -48,3 +49,37 @@ window.addEventListener("keyup", (event) => {
     keyboard.D = false;
   }
 });
+
+function startGame() {
+  startScreen.style.display = "none";
+  canvas.style.display = "flex";
+  initLevel1();
+  world = new World(canvas, keyboard);
+}
+
+function showControll() {
+  startScreen.style.display = "none";
+  controllSreen.style.display = "flex";
+}
+
+function backToMenu() {
+  startScreen.style.display = "flex";
+  controllSreen.style.display = "none";
+}
+
+function showLoseScreen() {
+  loseScreen.style.display = "flex";
+  world.stopGame();
+}
+
+function showWinScreen() {
+  winScreen.style.display = "flex";
+  world.stopGame();
+}
+
+function restartGame() {
+  loseScreen.style.display = "none";
+  winScreen.style.display = "none";
+  initLevel1();
+  world = new World(canvas, keyboard);
+}

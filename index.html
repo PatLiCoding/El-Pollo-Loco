@@ -35,8 +35,8 @@
     <h1>El Pollo Loco</h1>
     <section id="gameSection">
       <div id="startContainer">
-        <button class="navBtn">START</button>
-        <button class="navBtn">CONTROLS</button>
+        <button class="navBtn" onclick="startGame()">START</button>
+        <button class="navBtn" onclick="showControll()">CONTROLS</button>
       </div>
 
       <div id="controllsContainer">
@@ -64,18 +64,37 @@
           </tr>
         </table>
 
-        <button class="navBtn">MENU</button>
+        <button class="navBtn" onclick="backToMenu()">MENU</button>
       </div>
 
       <div id="winContainer">
-        <button class="navBtn">TRY AGAIN</button>
+        <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
       </div>
 
       <div id="loseContainer">
-        <button class="navBtn">TRY AGAIN</button>
+        <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
       </div>
 
       <canvas id="canvas" width="720" height="480"> </canvas>
+
+      <div id="fullscreenAndSounds">
+        <div id="soundsContainer">
+          <img src="assets/icon/sound_on.png" alt="Sound on" />
+          <img
+            src="assets/icon/no_sound.png"
+            alt="Sounds off"
+            class="displayNone"
+          />
+        </div>
+        <div id="fullscreenContainer">
+          <img src="assets/icon/fullscreen.png" alt="Fullscreen" />
+          <img
+            src="assets/icon/fullscreen_exit.png"
+            alt="Close Fullscreen"
+            class="displayNone"
+          />
+        </div>
+      </div>
     </section>
   </body>
 </html>

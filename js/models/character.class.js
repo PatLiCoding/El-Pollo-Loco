@@ -126,4 +126,12 @@ class Character extends MoveableObject {
       }
     }, 80);
   }
+
+  reset() {
+    this.x = 60;
+    this.y = 140;
+    this.speedY = 0;
+    this.isDead = false;
+    this.energy = 100;
+  }
 }

@@ -3,6 +3,7 @@ class World {
   level = level1;
   canvas;
   ctx;
+  animationId;
   keyboard;
   camera_x = 0;
   statusBar = [
@@ -55,8 +56,8 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
 
-    let self = this;
-    requestAnimationFrame(() => self.draw());
+    // let self = this;
+    this.animationId = requestAnimationFrame(() => this.draw());
     this.setWorld();
   }
 
@@ -90,6 +91,10 @@ class World {
     //     AudioHub.playOne(AudioHub.GAMESOUND);
     //   }, 50);
     // }, 8000);
+  }
+
+  stopGame() {
+    cancelAnimationFrame(this.animationId);
   }
 
   checkCollisions() {
@@ -187,6 +192,7 @@ class World {
                 this.killedBoss(enemy);
                 this.level.enemies.splice(enemyIndex, 1);
               }, enemy.IMAGES_DEAD.length * 200);
+              showWinScreen();
             }
           } else {
             this.isKilled(enemy);
