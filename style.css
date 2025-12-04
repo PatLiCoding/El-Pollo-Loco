@@ -51,6 +51,8 @@ h3 {
 canvas {
   display: none;
   background-color: rgb(8, 8, 8);
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: -1;
 }
@@ -61,8 +63,8 @@ canvas {
   justify-content: center;
   align-items: center;
   gap: 16px;
-  height: 480px;
-  width: 720px;
+  height: 100%;
+  width: 100%;
   background-image: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -73,9 +75,9 @@ canvas {
   display: none;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  height: 480px;
-  width: 720px;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
   padding-top: 32px;
   background-image: url("assets/img/5_background/first_half_background.png");
   background-color: rgb(134, 207, 235);
@@ -111,13 +113,12 @@ td {
   justify-content: center;
   align-items: flex-end;
   gap: 16px;
-  padding-bottom: 16px;
-  height: 480px;
-  width: 720px;
-  background-image: url("./assets/img/You won, you lost/You Win A.png");
-  background-size: contain;
+  height: 100%;
+  width: 100%;
+  background-image: url("./assets/img/You won, you lost/You won A.png");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
 }
 
 #loseContainer {
@@ -125,28 +126,46 @@ td {
   justify-content: center;
   align-items: flex-end;
   gap: 16px;
-  padding-bottom: 16px;
-  height: 480px;
-  width: 720px;
+  height: 100%;
+  width: 100%;
   background-image: url("assets/img/9_intro_outro_screens/game_over/you lost.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
+  position: relative;
 }
 
-#fullscreenAndSounds {
-  width: 100%;
+.backgroundImage {
   position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-position: top;
+}
+
+#soundsContainer {
+  position: absolute;
+  bottom: 10;
+  left: 20;
+}
+
+#fullscreenContainer {
+  position: absolute;
+  bottom: 10;
+  right: 20;
 }
 
 img {
   width: 32px;
   height: 32px;
   object-fit: cover;
+  transition: all 125ms ease-in-out;
+}
+
+img:hover {
+  cursor: pointer;
+  scale: calc(1.4);
+  filter: drop-shadow(5px 5px 10px rgb(252, 252, 251));
 }
 
 .navBtn {
@@ -159,6 +178,7 @@ img {
   border: none;
   transition: all 125ms ease-in;
   width: 10rem;
+  margin-bottom: 16px;
 }
 
 .navBtn:hover {

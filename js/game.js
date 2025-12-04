@@ -1,13 +1,12 @@
 let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
+let gameSectionRef = document.getElementById("gameSection");
 let canvas = document.getElementById("canvas");
 let startScreen = document.getElementById("startContainer");
 let controllSreen = document.getElementById("controllsContainer");
 let loseScreen = document.getElementById("loseContainer");
 let winScreen = document.getElementById("winContainer");
-
-function init() {}
 
 window.addEventListener("keydown", (event) => {
   if (event.keyCode == 39) {
@@ -73,17 +72,46 @@ function backToMenu() {
 
 function showLoseScreen() {
   loseScreen.style.display = "flex";
+  canvas.style.display = "none";
   world.stopGame();
 }
 
 function showWinScreen() {
   winScreen.style.display = "flex";
+  canvas.style.display = "none";
   world.stopGame();
 }
 
 function restartGame() {
   loseScreen.style.display = "none";
   winScreen.style.display = "none";
+  canvas.style.display = "flex";
   initLevel1();
   world = new World(canvas, keyboard);
+}
+
+function openFullscreen() {
+  document.getElementById("openFullscreenIcon").classList.add("displayNone");
+  document
+    .getElementById("closeFullscreenIcon")
+    .classList.remove("displayNone");
+  if (gameSectionRef.requestFullscreen) {
+    gameSectionRef.requestFullscreen();
+  } else if (gameSectionRef.webkitRequestFullscreen) {
+    gameSectionRef.webkitRequestFullscreen();
+  } else if (gameSectionRef.msRequestFullscreen) {
+    gameSectionRef.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  document.getElementById("closeFullscreenIcon").classList.add("displayNone");
+  document.getElementById("openFullscreenIcon").classList.remove("displayNone");
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
 }

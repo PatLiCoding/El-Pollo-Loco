@@ -31,7 +31,7 @@
     <script src="./js/levels/level1.js"></script>
     <script src="./js/game.js" defer></script>
   </head>
-  <body onload="init()">
+  <body>
     <h1>El Pollo Loco</h1>
     <section id="gameSection">
       <div id="startContainer">
@@ -68,11 +68,21 @@
       </div>
 
       <div id="winContainer">
+        <img
+          class="backgroundImage"
+          src="assets/img/5_background/first_half_background.png"
+          alt="Winscreen"
+        />
         <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
         <button class="navBtn" onclick="backToMenu()">MENU</button>
       </div>
 
       <div id="loseContainer">
+        <img
+          class="backgroundImage"
+          src="assets/img/5_background/first_half_background.png"
+          alt="Losescreen"
+        />
         <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
         <button class="navBtn" onclick="backToMenu()">MENU</button>
       </div>
@@ -89,11 +99,18 @@
       </div>
 
       <div id="fullscreenContainer">
-        <img src="assets/icon/fullscreen.png" alt="Fullscreen" />
         <img
+          id="openFullscreenIcon"
+          src="assets/icon/fullscreen.png"
+          alt="Fullscreen"
+          onclick="openFullscreen()"
+        />
+        <img
+          id="closeFullscreenIcon"
           src="assets/icon/fullscreen_exit.png"
           alt="Close Fullscreen"
           class="displayNone"
+          onclick="closeFullscreen()"
         />
       </div>
     </section>
