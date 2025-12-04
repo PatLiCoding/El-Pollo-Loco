@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "zabars";
+  src: url("assets/fonts/zabars.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +11,7 @@
 }
 
 body {
+  font-family: "zabars", Arial, Helvetica, sans-serif;
   background-color: rosybrown;
   background-image: linear-gradient(rgba(5, 5, 5, 0.5)),
     url("./assets/img/5_background/complete_background.png");
@@ -18,6 +24,7 @@ body {
   flex-direction: column;
   gap: 16px;
   padding-top: 42px;
+  letter-spacing: 4px;
 }
 
 h1 {

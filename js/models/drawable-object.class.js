@@ -24,10 +24,12 @@ class DrawableObject {
   }
 
   draw(ctx) {
-    if (this.img instanceof HTMLImageElement) {
-      if (this.img.naturalWidth === 0) return;
+    try {
+      ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    } catch (e) {
+      console.log("Fehler beim laden von ", e);
+      console.log("Dieses Bild konnte nicht geladen werden", this.img.src);
     }
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   drawFrame(ctx) {
