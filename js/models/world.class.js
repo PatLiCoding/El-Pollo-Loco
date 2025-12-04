@@ -108,7 +108,11 @@ class World {
       enemy.getRealFrame();
 
       if (this.character.isJumpOn(enemy)) {
-        this.isKilled(enemy);
+        if (enemy.isSmallChicken) {
+          this.killedSmallChicken(enemy);
+        } else {
+          this.KilledChicken(enemy);
+        }
         this.level.enemies.splice(index, 1);
         this.character.speedY = 25;
         AudioHub.playOne(AudioHub.ENEMY_HURT);
@@ -202,8 +206,11 @@ class World {
               }, enemy.IMAGES_DEAD.length * 200);
               showWinScreen();
             }
+          } else if (enemy.isSmallChicken) {
+            this.killedSmallChicken(enemy);
+            this.level.enemies.splice(enemyIndex, 1);
           } else {
-            this.isKilled(enemy);
+            this.KilledChicken(enemy);
             this.level.enemies.splice(enemyIndex, 1);
           }
           this.throwableObjects.splice(bottleIndex, 1);
@@ -243,7 +250,7 @@ class World {
     this.ctx.restore();
   }
 
-  isKilled(enemy) {
+  KilledChicken(enemy) {
     const dead = new DrawableObject();
     dead.loadImage(
       "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
@@ -258,6 +265,18 @@ class World {
   killedBoss(enemy) {
     const dead = new DrawableObject();
     dead.loadImage("assets/img/4_enemie_boss_chicken/5_dead/G26.png");
+    dead.x = enemy.x;
+    dead.y = enemy.y;
+    dead.width = enemy.width;
+    dead.height = enemy.height;
+    this.deadEnemies.push(dead);
+  }
+
+  killedSmallChicken(enemy) {
+    const dead = new DrawableObject();
+    dead.loadImage(
+      "assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+    );
     dead.x = enemy.x;
     dead.y = enemy.y;
     dead.width = enemy.width;
