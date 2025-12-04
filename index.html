@@ -90,11 +90,18 @@
       <canvas id="canvas" width="720" height="480"> </canvas>
 
       <div id="soundsContainer">
-        <img src="assets/icon/sound_on.png" alt="Sound on" />
         <img
+          id="startSound"
+          src="assets/icon/sound_on.png"
+          alt="Sound on"
+          onclick="mute()"
+        />
+        <img
+          id="stopSound"
           src="assets/icon/no_sound.png"
           alt="Sounds off"
           class="displayNone"
+          onclick="unmute()"
         />
       </div>
 

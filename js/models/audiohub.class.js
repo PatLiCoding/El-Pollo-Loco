@@ -9,6 +9,7 @@ class AudioHub {
   static BOTTLE_COLLECT = new Audio("audio/collect-bottle.mp3");
   static BOTTLE_SMASH = new Audio("audio/break-bottle.mp3");
   static GAMESOUND = new Audio("audio/gamesound.mp3");
+  static isMuted = false;
 
   static allSounds = [
     AudioHub.ENEMY_HURT,
@@ -24,6 +25,7 @@ class AudioHub {
   ];
 
   static playOne(sound) {
+    if (AudioHub.isMuted) return;
     if (sound.readyState == 4) {
       sound.volume = 0.2;
       sound.currentTime = 0;
@@ -37,17 +39,14 @@ class AudioHub {
     AudioHub.allSounds.forEach((sound) => {
       sound.pause();
     });
-    document.getElementById("volume").value = 0.2;
   }
 
-  static stopOne(sound) {
-    sound.pause();
+  static mute() {
+    AudioHub.isMuted = true;
+    AudioHub.stopAll();
   }
 
-  //   static objSetVolume(volumeSliderID) {
-  //     let currentVolumeValue = document.getElementById(volumeSliderID).value; // Holt den aktuellen Lautstärkewert aus dem Inputfeld
-  //     AudioHub.allSounds.forEach((sound) => {
-  //       sound.volume = currentVolumeValue; // Setzt die Lautstärke für jedes Audio wie im Slider angegeben
-  //     });
-  //   }
+  static unmute() {
+    AudioHub.isMuted = false;
+  }
 }

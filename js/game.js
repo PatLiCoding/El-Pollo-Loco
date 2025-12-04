@@ -115,3 +115,16 @@ function closeFullscreen() {
     document.msExitFullscreen();
   }
 }
+
+function mute() {
+  AudioHub.stopAll();
+  AudioHub.mute();
+  document.getElementById("startSound").classList.add("displayNone");
+  document.getElementById("stopSound").classList.remove("displayNone");
+}
+
+function unmute() {
+  AudioHub.unmute();
+  document.getElementById("startSound").classList.remove("displayNone");
+  document.getElementById("stopSound").classList.add("displayNone");
+}

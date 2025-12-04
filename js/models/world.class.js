@@ -26,7 +26,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    // AudioHub.playOne(AudioHub.GAMESOUND);
+    AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   draw() {
@@ -56,7 +56,6 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
 
-    // let self = this;
     this.animationId = requestAnimationFrame(() => this.draw());
     this.setWorld();
   }
@@ -85,12 +84,12 @@ class World {
         }
       });
     }, 1000 / 60);
-    // setInterval(() => {
-    //   setTimeout(() => {
-    //     AudioHub.GAMESOUND.loop = true;
-    //     AudioHub.playOne(AudioHub.GAMESOUND);
-    //   }, 50);
-    // }, 8000);
+    setInterval(() => {
+      setTimeout(() => {
+        AudioHub.GAMESOUND.loop = true;
+        AudioHub.playOne(AudioHub.GAMESOUND);
+      }, 50);
+    }, 8000);
   }
 
   setStoppableInterval(fm, time) {
@@ -99,7 +98,7 @@ class World {
   }
 
   stopGame() {
-    // cancelAnimationFrame(this.animationId);
+    cancelAnimationFrame(this.animationId);
     intervalIds.forEach(clearInterval);
   }
 
