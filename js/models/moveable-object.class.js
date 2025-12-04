@@ -62,6 +62,10 @@ class MoveableObject extends DrawableObject {
     return this.energy == 0;
   }
 
+  isSleeping() {
+    return Date.now() - this.lastActionTime > this.idleTimeout;
+  }
+
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];

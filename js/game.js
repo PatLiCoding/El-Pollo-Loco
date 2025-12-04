@@ -66,6 +66,9 @@ function showControll() {
 function backToMenu() {
   startScreen.style.display = "flex";
   controllSreen.style.display = "none";
+  loseScreen.style.display = "none";
+  winScreen.style.display = "none";
+  world.stopGame();
 }
 
 function showLoseScreen() {

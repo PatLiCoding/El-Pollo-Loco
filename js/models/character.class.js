@@ -117,7 +117,7 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
-      } else if (Date.now() - this.lastActionTime > this.idleTimeout) {
+      } else if (this.isSleeping()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_WALKING);
@@ -125,13 +125,5 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 80);
-  }
-
-  reset() {
-    this.x = 60;
-    this.y = 140;
-    this.speedY = 0;
-    this.isDead = false;
-    this.energy = 100;
   }
 }
