@@ -1,5 +1,6 @@
 let world;
 let keyboard = new Keyboard();
+let intervalIds = [];
 let canvas = document.getElementById("canvas");
 let startScreen = document.getElementById("startContainer");
 let controllSreen = document.getElementById("controllsContainer");

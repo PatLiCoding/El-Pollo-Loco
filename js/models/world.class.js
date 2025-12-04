@@ -66,12 +66,12 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    this.setStoppableInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkBottle();
     }, 200);
-    setInterval(() => {
+    this.setStoppableInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (enemy.isBoss && !enemy.isDead) {
           if (!this.bossTriggered && this.character.x >= 1500) {
@@ -93,8 +93,14 @@ class World {
     // }, 8000);
   }
 
+  setStoppableInterval(fm, time) {
+    let id = setInterval(fm, time);
+    intervalIds.push(id);
+  }
+
   stopGame() {
-    cancelAnimationFrame(this.animationId);
+    // cancelAnimationFrame(this.animationId);
+    intervalIds.forEach(clearInterval);
   }
 
   checkCollisions() {
@@ -152,6 +158,10 @@ class World {
       this.statusBar[1].percentage >= 20
     ) {
       this.lastKeyD = true;
+      if (this.character.otherDirection) {
+        this.character.x - 50;
+        this.character.otherDirection = !this.character.otherDirection;
+      }
       let bottle = new ThrowableObject(
         this.character.x + 50,
         this.character.y + 120
@@ -259,10 +269,10 @@ class World {
 
   isBottleHitEnemy(bottle, enemy) {
     return (
-      bottle.x + bottle.width > enemy.x &&
-      bottle.x < enemy.x + enemy.width &&
-      bottle.y + bottle.height > enemy.y &&
-      bottle.y < enemy.y + enemy.height
+      bottle.rx + bottle.width > enemy.rx &&
+      bottle.rx < enemy.rx + enemy.width &&
+      bottle.ry + bottle.height > enemy.ry &&
+      bottle.ry < enemy.ry + enemy.height
     );
   }
 }
