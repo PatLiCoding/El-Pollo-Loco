@@ -35,6 +35,10 @@ class AudioHub {
     }
   }
 
+  static stopOne(sound) {
+    sound.pause();
+  }
+
   static stopAll() {
     AudioHub.allSounds.forEach((sound) => {
       sound.pause();
