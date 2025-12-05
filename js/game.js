@@ -62,12 +62,16 @@ function showControll() {
   controllSreen.style.display = "flex";
 }
 
-function backToMenu() {
+function gameToMenu() {
   startScreen.style.display = "flex";
-  controllSreen.style.display = "none";
   loseScreen.style.display = "none";
   winScreen.style.display = "none";
   world.stopGame();
+}
+
+function controllToMenu() {
+  startScreen.style.display = "flex";
+  controllSreen.style.display = "none";
 }
 
 function showLoseScreen() {
