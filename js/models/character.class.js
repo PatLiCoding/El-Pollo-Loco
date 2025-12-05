@@ -64,6 +64,7 @@ class Character extends MoveableObject {
   world;
   lastActionTime = new Date().getTime();
   idleTimeout = 5000;
+  sleeping = false;
 
   rx;
   ry;

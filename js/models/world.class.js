@@ -150,6 +150,18 @@ class World {
       }
     });
 
+    if (this.character.isSleeping()) {
+      if (!this.character.sleeping) {
+        AudioHub.playOne(AudioHub.PEPE_SLEEPING);
+        this.character.sleeping = true;
+      }
+    } else {
+      if (this.character.sleeping) {
+        AudioHub.stopOne(AudioHub.PEPE_SLEEPING);
+        this.character.sleeping = false;
+      }
+    }
+
     this.character.updateLastBottom();
   }
 
