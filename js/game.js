@@ -52,36 +52,36 @@ window.addEventListener("keyup", (event) => {
 
 function startGame() {
   startScreen.style.display = "none";
-  canvas.style.display = "flex";
+  canvas.style.display = "block";
   initLevel1();
   world = new World(canvas, keyboard);
 }
 
 function showControll() {
   startScreen.style.display = "none";
-  controllSreen.style.display = "flex";
+  controllSreen.style.display = "block";
 }
 
 function gameToMenu() {
-  startScreen.style.display = "flex";
+  startScreen.style.display = "block";
   loseScreen.style.display = "none";
   winScreen.style.display = "none";
   world.stopGame();
 }
 
 function controllToMenu() {
-  startScreen.style.display = "flex";
+  startScreen.style.display = "block";
   controllSreen.style.display = "none";
 }
 
 function showLoseScreen() {
-  loseScreen.style.display = "flex";
+  loseScreen.style.display = "block";
   canvas.style.display = "none";
   world.stopGame();
 }
 
 function showWinScreen() {
-  winScreen.style.display = "flex";
+  winScreen.style.display = "block";
   canvas.style.display = "none";
   world.stopGame();
 }
@@ -89,7 +89,7 @@ function showWinScreen() {
 function restartGame() {
   loseScreen.style.display = "none";
   winScreen.style.display = "none";
-  canvas.style.display = "flex";
+  canvas.style.display = "block";
   initLevel1();
   world = new World(canvas, keyboard);
 }

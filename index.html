@@ -36,56 +36,64 @@
     <h1>El Pollo Loco</h1>
     <section id="gameSection">
       <div id="startContainer">
-        <button class="navBtn" onclick="startGame()">START</button>
-        <button class="navBtn" onclick="showControll()">CONTROLS</button>
+        <div id="startContant">
+          <button class="navBtn" onclick="startGame()">START</button>
+          <button class="navBtn" onclick="showControll()">CONTROLS</button>
+        </div>
       </div>
 
       <div id="controllsContainer">
-        <h3>Controlls</h3>
-        <table>
-          <tr>
-            <td>
-              <button class="controllBtn" disabled>Left Arrow</button>/
-              <button class="controllBtn" disabled>Right Arrow</button>
-            </td>
-            <td>MOVE</td>
-          </tr>
-          <tr>
-            <td>
-              <button class="controllBtn" disabled>SPACE</button>/
-              <button class="controllBtn" disabled>Up Arrow</button>
-            </td>
-            <td>JUMP</td>
-          </tr>
-          <tr>
-            <td>
-              <button class="controllBtn" disabled>D</button>
-            </td>
-            <td>Throw Bottle</td>
-          </tr>
-        </table>
+        <div id="controllsContant">
+          <h3>Controlls</h3>
+          <table>
+            <tr>
+              <td>
+                <button class="controllBtn" disabled>Left Arrow</button>/
+                <button class="controllBtn" disabled>Right Arrow</button>
+              </td>
+              <td>MOVE</td>
+            </tr>
+            <tr>
+              <td>
+                <button class="controllBtn" disabled>SPACE</button>/
+                <button class="controllBtn" disabled>Up Arrow</button>
+              </td>
+              <td>JUMP</td>
+            </tr>
+            <tr>
+              <td>
+                <button class="controllBtn" disabled>D</button>
+              </td>
+              <td>Throw Bottle</td>
+            </tr>
+          </table>
 
-        <button class="navBtn" onclick="controllToMenu()">MENU</button>
+          <button class="navBtn" onclick="controllToMenu()">MENU</button>
+        </div>
       </div>
 
       <div id="winContainer">
-        <img
-          class="backgroundImage"
-          src="assets/img/5_background/first_half_background.png"
-          alt="Winscreen"
-        />
-        <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
-        <button class="navBtn" onclick="gameToMenu()">MENU</button>
+        <div id="winContant">
+          <img
+            class="backgroundImage"
+            src="assets/img/5_background/first_half_background.png"
+            alt="Winscreen"
+          />
+          <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
+          <button class="navBtn" onclick="gameToMenu()">MENU</button>
+        </div>
       </div>
 
       <div id="loseContainer">
-        <img
-          class="backgroundImage"
-          src="assets/img/5_background/first_half_background.png"
-          alt="Losescreen"
-        />
-        <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
-        <button class="navBtn" onclick="gameToMenu()">MENU</button>
+        <div id="loseContant">
+          <img
+            class="backgroundImage"
+            src="assets/img/5_background/first_half_background.png"
+            alt="Losescreen"
+          />
+          <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
+          <button class="navBtn" onclick="gameToMenu()">MENU</button>
+        </div>
       </div>
 
       <canvas id="canvas" width="720" height="480"> </canvas>
@@ -122,5 +130,22 @@
         />
       </div>
     </section>
+    <div id="rotatePhoneContainer">
+      <div id="rotatePhoneContant">
+        <p>Please rotate your Phone.</p>
+        <div id="phoneImageContainer">
+          <img
+            id="phoneImage"
+            src="assets/img/rotate_phone/iphone.png"
+            alt="Phone"
+          />
+          <img
+            id="arrowImage"
+            src="assets/img/rotate_phone/arrow-to-right.png"
+            alt="Arrow"
+          />
+        </div>
+      </div>
+    </div>
   </body>
 </html>

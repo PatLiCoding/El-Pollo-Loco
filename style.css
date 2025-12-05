@@ -23,7 +23,6 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 16px;
-  padding-top: 42px;
   letter-spacing: 4px;
 }
 
@@ -31,6 +30,7 @@ h1 {
   color: rgb(251, 249, 249);
   font-size: 52px;
   text-shadow: 2px 2px 4px #000000;
+  padding-top: 42px;
 }
 
 h3 {
@@ -53,6 +53,8 @@ h3 {
   width: 720px;
   position: relative;
   overflow: hidden;
+  display: block;
+  margin-bottom: 24px;
 }
 
 canvas {
@@ -65,6 +67,14 @@ canvas {
 }
 
 #startContainer {
+  display: block;
+  background-image: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+#startContant {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,25 +82,25 @@ canvas {
   gap: 16px;
   height: 100%;
   width: 100%;
-  background-image: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
+}
+
+#controllsContainer {
+  display: none;
+  background-image: url("assets/img/5_background/first_half_background.png");
+  background-color: rgb(134, 207, 235);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
 }
 
-#controllsContainer {
-  display: none;
+#controllsContant {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   height: 100%;
   width: 100%;
   padding-top: 32px;
-  background-image: url("assets/img/5_background/first_half_background.png");
-  background-color: rgb(134, 207, 235);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
 }
 
 table {
@@ -117,29 +127,37 @@ td {
 
 #winContainer {
   display: none;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 16px;
-  height: 100%;
-  width: 100%;
   background-image: url("./assets/img/You won, you lost/You won A.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-#loseContainer {
-  display: none;
+#winContant {
+  display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 16px;
   height: 100%;
   width: 100%;
+}
+
+#loseContainer {
+  display: none;
   background-image: url("assets/img/9_intro_outro_screens/game_over/you lost.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
   position: relative;
+}
+
+#loseContant {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  height: 100%;
+  width: 100%;
 }
 
 .backgroundImage {
@@ -160,6 +178,33 @@ td {
   position: absolute;
   bottom: 10;
   right: 20;
+}
+
+#rotatePhoneContainer {
+  display: none;
+  color: rgb(251, 249, 249);
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 32px;
+}
+
+#rotatePhoneContant {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+#phoneImage {
+  width: 90px;
+  height: 180px;
+  object-fit: cover;
+}
+
+#arrowImage {
+  width: 90px;
+  height: 100px;
+  object-fit: fill;
 }
 
 img {
@@ -205,4 +250,45 @@ img:hover {
 
 .displayNone {
   display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  #gameSection {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  #gameSection {
+    height: 100vh;
+  }
+}
+
+@media (hover: none) and (orientation: portrait) {
+  #rotatePhoneContainer {
+    display: block;
+  }
+
+  #gameSection {
+    display: none;
+  }
+
+  h1 {
+    display: block;
+  }
+}
+
+@media (hover: none) and (orientation: landscape) {
+  #gameSection {
+    display: block;
+  }
+
+  #rotatePhoneContainer {
+    display: none;
+  }
+
+  h1 {
+    display: none;
+  }
 }
