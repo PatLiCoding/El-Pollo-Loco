@@ -6,6 +6,7 @@ class Endboss extends MoveableObject {
   isHurt = false;
   isDead = false;
   isAttack = false;
+  otherDirection = false;
   speed = 2;
 
   IMAGES_WALKING = [

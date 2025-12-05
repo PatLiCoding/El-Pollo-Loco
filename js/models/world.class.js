@@ -76,8 +76,12 @@ class World {
             this.bossTriggered = true;
           }
           if (this.bossTriggered) {
-            if (enemy.x > 0) {
+            if (enemy.x < this.character.x) {
+              enemy.moveRight();
+              enemy.otherDirection = true;
+            } else if (enemy.x > this.character.x) {
               enemy.moveLeft();
+              enemy.otherDirection = false;
             }
           }
         }
