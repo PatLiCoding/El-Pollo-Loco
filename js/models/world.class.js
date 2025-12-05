@@ -87,12 +87,12 @@ class World {
         }
       });
     }, 1000 / 60);
-    setInterval(() => {
-      setTimeout(() => {
-        AudioHub.GAMESOUND.loop = true;
-        AudioHub.playOne(AudioHub.GAMESOUND);
-      }, 50);
-    }, 7000);
+    // setInterval(() => {
+    //   setTimeout(() => {
+    //     AudioHub.GAMESOUND.loop = true;
+    //     AudioHub.playOne(AudioHub.GAMESOUND);
+    //   }, 50);
+    // }, 7000);
   }
 
   setStoppableInterval(fm, time) {
@@ -195,16 +195,21 @@ class World {
   checkBottle() {
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       bottle.getRealFrame();
+      if (bottle.hasHit) return;
+      if (bottle.isSplashFloor() && !bottle.bottleOnFloor) {
+        bottle.bottleOnFloor = true;
+        AudioHub.playOne(AudioHub.BOTTLE_SMASH);
+      }
 
       this.level.enemies.forEach((enemy, enemyIndex) => {
         enemy.getRealFrame();
 
-        if (this.isBottleHitEnemy(bottle, enemy)) {
+        if (!bottle.hasHit && this.isBottleHitEnemy(bottle, enemy)) {
+          bottle.hasHit = true;
+          bottle.isCollidingEnemie = true;
+          bottle.currentImage = 0;
           AudioHub.playOne(AudioHub.BOTTLE_SMASH);
-          AudioHub.playOne(AudioHub.ENEMY_HURT);
-
           if (enemy.isBoss) {
-            AudioHub.playOne(AudioHub.BOTTLE_SMASH);
             enemy.energy -= 20;
             this.statusBar[2].setPercentage(enemy.energy);
 
@@ -216,20 +221,19 @@ class World {
               enemy.isDead = true;
               enemy.currentImage = 0;
               AudioHub.playOne(AudioHub.ENEMY_BOSS_DEAD);
-              setTimeout(() => {
-                this.killedBoss(enemy);
-                this.level.enemies.splice(enemyIndex, 1);
-              }, enemy.IMAGES_DEAD.length * 200);
+              this.isSplashEnemy(bottle, enemyIndex);
               showWinScreen();
             }
           } else if (enemy.isSmallChicken) {
             this.killedSmallChicken(enemy);
-            this.level.enemies.splice(enemyIndex, 1);
+            this.isSplashEnemy(bottle, enemyIndex);
           } else {
             this.KilledChicken(enemy);
-            this.level.enemies.splice(enemyIndex, 1);
+            this.isSplashEnemy(bottle, enemyIndex);
           }
-          this.throwableObjects.splice(bottleIndex, 1);
+          setTimeout(() => {
+            this.throwableObjects.splice(bottleIndex, 1);
+          }, bottle.IMAGE_SPLASH.length * 80);
         }
       });
     });
@@ -307,5 +311,15 @@ class World {
       bottle.ry + bottle.height > enemy.ry &&
       bottle.ry < enemy.ry + enemy.height
     );
+  }
+
+  isSplashEnemy(bottle, enemyIndex) {
+    setTimeout(() => {
+      this.level.enemies.splice(enemyIndex, 1);
+    }, bottle.IMAGE_SPLASH.length * 80);
+  }
+
+  isSplashFloor() {
+    return this.ry + this.height >= 380;
   }
 }

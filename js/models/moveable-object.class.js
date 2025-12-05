@@ -99,4 +99,8 @@ class MoveableObject extends DrawableObject {
 
     return touching && fromAbove;
   }
+
+  isSplashFloor() {
+    return this.ry + this.height >= 380;
+  }
 }
