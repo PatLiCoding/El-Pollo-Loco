@@ -5,10 +5,11 @@ class Keyboard {
   DOWN = false;
   SPACE = false;
   D = false;
+  lastKeyD = false;
 
   constructor() {
     this.bindKeyPressEvents();
-    // this.bindBtsPressEvents();
+    this.bindBtsPressEvents();
   }
 
   bindKeyPressEvents() {
@@ -53,5 +54,63 @@ class Keyboard {
         keyboard.D = false;
       }
     });
+  }
+
+  bindBtsPressEvents() {
+    document
+      .getElementById("btnLeft")
+      .addEventListener("touchstart", (event) => {
+        event.preventDefault();
+        this.LEFT = true;
+      });
+
+    document.getElementById("btnLeft").addEventListener("touchend", (event) => {
+      event.preventDefault();
+      this.LEFT = false;
+    });
+
+    document
+      .getElementById("btnRight")
+      .addEventListener("touchstart", (event) => {
+        event.preventDefault();
+        this.RIGHT = true;
+      });
+
+    document
+      .getElementById("btnRight")
+      .addEventListener("touchend", (event) => {
+        event.preventDefault();
+        this.RIGHT = false;
+      });
+
+    document
+      .getElementById("btnJump")
+      .addEventListener("touchstart", (event) => {
+        event.preventDefault();
+        this.UP = true;
+      });
+
+    document.getElementById("btnJump").addEventListener("touchend", (event) => {
+      event.preventDefault();
+      this.UP = false;
+    });
+
+    document
+      .getElementById("btnThrow")
+      .addEventListener("touchstart", (event) => {
+        event.preventDefault();
+        if (!this.lastKeyD) {
+          this.D = true;
+          this.lastKeyD = true;
+        }
+      });
+
+    document
+      .getElementById("btnThrow")
+      .addEventListener("touchend", (event) => {
+        event.preventDefault();
+        this.D = false;
+        this.lastKeyD = false;
+      });
   }
 }

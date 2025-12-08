@@ -35,101 +35,113 @@
   <body>
     <h1>El Pollo Loco</h1>
     <section id="gameSection">
-      <div id="startContainer">
-        <div id="startContant">
-          <button class="navBtn" onclick="startGame()">START</button>
-          <button class="navBtn" onclick="showControll()">CONTROLS</button>
-        </div>
+      <div class="panelWrapperJumpThrow">
+        <button id="btnJump" class="panelBtn">J</button>
+        <button id="btnThrow" class="panelBtn">T</button>
       </div>
 
-      <div id="controllsContainer">
-        <div id="controllsContant">
-          <h3>Controlls</h3>
-          <table>
-            <tr>
-              <td>
-                <button class="controllBtn" disabled>Left Arrow</button>/
-                <button class="controllBtn" disabled>Right Arrow</button>
-              </td>
-              <td>MOVE</td>
-            </tr>
-            <tr>
-              <td>
-                <button class="controllBtn" disabled>SPACE</button>/
-                <button class="controllBtn" disabled>Up Arrow</button>
-              </td>
-              <td>JUMP</td>
-            </tr>
-            <tr>
-              <td>
-                <button class="controllBtn" disabled>D</button>
-              </td>
-              <td>Throw Bottle</td>
-            </tr>
-          </table>
-
-          <button class="navBtn" onclick="controllToMenu()">MENU</button>
-        </div>
+      <div class="panelWrapperLeftRight">
+        <button id="btnLeft" class="panelBtn">L</button>
+        <button id="btnRight" class="panelBtn">R</button>
       </div>
+      <div id="gameContainer">
+        <div id="startContainer">
+          <div id="startContant">
+            <button class="navBtn" onclick="startGame()">START</button>
+            <button class="navBtn" onclick="showControll()">CONTROLS</button>
+          </div>
+        </div>
 
-      <div id="winContainer">
-        <div id="winContant">
+        <div id="controllsContainer">
+          <div id="controllsContant">
+            <h3>Controlls</h3>
+            <table>
+              <tr>
+                <td>
+                  <button class="controllBtn" disabled>Left Arrow</button>/
+                  <button class="controllBtn" disabled>Right Arrow</button>
+                </td>
+                <td>MOVE</td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="controllBtn" disabled>SPACE</button>/
+                  <button class="controllBtn" disabled>Up Arrow</button>
+                </td>
+                <td>JUMP</td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="controllBtn" disabled>D</button>
+                </td>
+                <td>Throw Bottle</td>
+              </tr>
+            </table>
+
+            <button class="navBtn" onclick="controllToMenu()">MENU</button>
+          </div>
+        </div>
+
+        <div id="winContainer">
+          <div id="winContant">
+            <img
+              class="backgroundImage"
+              src="assets/img/5_background/first_half_background.png"
+              alt="Winscreen"
+            />
+            <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
+            <button class="navBtn" onclick="gameToMenu()">MENU</button>
+          </div>
+        </div>
+
+        <div id="loseContainer">
+          <div id="loseContant">
+            <img
+              class="backgroundImage"
+              src="assets/img/5_background/first_half_background.png"
+              alt="Losescreen"
+            />
+            <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
+            <button class="navBtn" onclick="gameToMenu()">MENU</button>
+          </div>
+        </div>
+
+        <canvas id="canvas" width="720" height="480"> </canvas>
+
+        <div id="soundsContainer">
           <img
-            class="backgroundImage"
-            src="assets/img/5_background/first_half_background.png"
-            alt="Winscreen"
+            id="startSound"
+            src="assets/icon/sound_on.png"
+            alt="Sound on"
+            onclick="mute()"
           />
-          <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
-          <button class="navBtn" onclick="gameToMenu()">MENU</button>
-        </div>
-      </div>
-
-      <div id="loseContainer">
-        <div id="loseContant">
           <img
-            class="backgroundImage"
-            src="assets/img/5_background/first_half_background.png"
-            alt="Losescreen"
+            id="stopSound"
+            src="assets/icon/no_sound.png"
+            alt="Sounds off"
+            class="displayNone"
+            onclick="unmute()"
           />
-          <button class="navBtn" onclick="restartGame()">TRY AGAIN</button>
-          <button class="navBtn" onclick="gameToMenu()">MENU</button>
         </div>
-      </div>
 
-      <canvas id="canvas" width="720" height="480"> </canvas>
-
-      <div id="soundsContainer">
-        <img
-          id="startSound"
-          src="assets/icon/sound_on.png"
-          alt="Sound on"
-          onclick="mute()"
-        />
-        <img
-          id="stopSound"
-          src="assets/icon/no_sound.png"
-          alt="Sounds off"
-          class="displayNone"
-          onclick="unmute()"
-        />
-      </div>
-
-      <div id="fullscreenContainer">
-        <img
-          id="openFullscreenIcon"
-          src="assets/icon/fullscreen.png"
-          alt="Fullscreen"
-          onclick="openFullscreen()"
-        />
-        <img
-          id="closeFullscreenIcon"
-          src="assets/icon/fullscreen_exit.png"
-          alt="Close Fullscreen"
-          class="displayNone"
-          onclick="closeFullscreen()"
-        />
+        <div id="fullscreenContainer">
+          <img
+            id="openFullscreenIcon"
+            src="assets/icon/fullscreen.png"
+            alt="Fullscreen"
+            onclick="openFullscreen()"
+          />
+          <img
+            id="closeFullscreenIcon"
+            src="assets/icon/fullscreen_exit.png"
+            alt="Close Fullscreen"
+            class="displayNone"
+            onclick="closeFullscreen()"
+          />
+        </div>
       </div>
     </section>
+
     <div id="rotatePhoneContainer">
       <div id="rotatePhoneContant">
         <p>Please rotate your Phone.</p>

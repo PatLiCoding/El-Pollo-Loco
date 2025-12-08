@@ -67,6 +67,8 @@ class World {
     this.setStoppableInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
+    }, 200);
+    this.setStoppableInterval(() => {
       this.checkBottle();
     }, 50);
     this.setStoppableInterval(() => {

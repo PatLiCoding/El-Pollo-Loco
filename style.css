@@ -40,6 +40,17 @@ h3 {
 }
 
 #gameSection {
+  height: 480px;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+#gameContainer {
   border: 2px solid transparent;
   border-image: conic-gradient(
       from 0deg,
@@ -49,12 +60,17 @@ h3 {
       rgb(80, 217, 248)
     )
     1;
-  height: 480px;
-  width: 720px;
+  width: 100%;
+  max-width: 720px;
+  height: 100%;
+  aspect-ratio: 3 / 2;
   position: relative;
-  overflow: hidden;
-  display: block;
-  margin-bottom: 24px;
+  overflow: visible;
+}
+
+.panelWrapperLeftRight,
+.panelWrapperJumpThrow {
+  display: none;
 }
 
 canvas {
@@ -63,7 +79,6 @@ canvas {
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: -1;
 }
 
 #startContainer {
@@ -72,6 +87,8 @@ canvas {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
+  height: 100%;
+  width: 100%;
 }
 
 #startContant {
@@ -91,6 +108,8 @@ canvas {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
+  height: 100%;
+  width: 100%;
 }
 
 #controllsContant {
@@ -148,7 +167,6 @@ td {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  position: relative;
 }
 
 #loseContant {
@@ -281,7 +299,17 @@ img:hover {
 
 @media (hover: none) and (orientation: landscape) {
   #gameSection {
-    display: block;
+    display: flex;
+    justify-content: center;
+  }
+
+  #gameContainer {
+    max-width: calc(100vw - 250px);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 2;
+    position: relative;
+    overflow: visible;
   }
 
   #rotatePhoneContainer {
@@ -290,5 +318,66 @@ img:hover {
 
   h1 {
     display: none;
+  }
+
+  .panelWrapperLeftRight,
+  .panelWrapperJumpThrow {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    z-index: 10;
+    gap: 4px;
+  }
+
+  .panelWrapperLeftRight {
+    right: 30px;
+  }
+
+  .panelWrapperJumpThrow {
+    left: 30px;
+  }
+
+  .panelBtn {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    border-radius: 50%;
+  }
+}
+
+@media (hover: none) and (orientation: landscape) and (max-width: 768px) {
+  #gameSection {
+    display: flex;
+    justify-content: center;
+  }
+
+  #gameContainer {
+    max-width: calc(100vw - 150px);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 2;
+    position: relative;
+    overflow: visible;
+  }
+
+  .panelWrapperLeftRight,
+  .panelWrapperJumpThrow {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    z-index: 10;
+    gap: 4px;
+  }
+
+  .panelWrapperLeftRight {
+    right: 10px;
+  }
+
+  .panelWrapperJumpThrow {
+    left: 10px;
   }
 }
