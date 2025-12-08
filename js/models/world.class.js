@@ -68,7 +68,7 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkBottle();
-    }, 200);
+    }, 50);
     this.setStoppableInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (enemy.isBoss && !enemy.isDead) {
@@ -320,6 +320,6 @@ class World {
   }
 
   isSplashFloor() {
-    return this.ry + this.height >= 380;
+    return this.ry + this.height >= 340;
   }
 }
