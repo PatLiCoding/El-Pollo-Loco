@@ -325,7 +325,7 @@ img:hover {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 80%;
+    top: 60%;
     transform: translateY(-50%);
     z-index: 10;
     gap: 4px;
@@ -344,6 +344,7 @@ img:hover {
     height: 60px;
     font-size: 16px;
     border-radius: 50%;
+    background-color: rosybrown;
   }
 }
 
@@ -367,7 +368,7 @@ img:hover {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 80%;
+    top: 60%;
     transform: translateY(-50%);
     z-index: 10;
     gap: 4px;
