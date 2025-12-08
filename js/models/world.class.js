@@ -105,6 +105,7 @@ class World {
   stopGame() {
     cancelAnimationFrame(this.animationId);
     intervalIds.forEach(clearInterval);
+    this.keyboard = [];
   }
 
   checkCollisions() {

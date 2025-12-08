@@ -91,6 +91,7 @@ function restartGame() {
   winScreen.style.display = "none";
   canvas.style.display = "block";
   initLevel1();
+  keyboard = new Keyboard();
   world = new World(canvas, keyboard);
 }
 
