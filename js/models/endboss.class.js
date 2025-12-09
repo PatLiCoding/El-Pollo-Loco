@@ -85,6 +85,7 @@ class Endboss extends MoveableObject {
 
   playDeadAnimation() {
     this.playAnimation(this.IMAGES_DEAD);
+    if (this.checkCurrentDeadImages() - 1) this.winGame();
   }
 
   playAttackAnimation() {
@@ -117,5 +118,10 @@ class Endboss extends MoveableObject {
   isNotMoreHurt() {
     this.isHurt = false;
     this.currentImage = 0;
+  }
+  winGame() {
+    setTimeout(() => {
+      showWinScreen();
+    }, 300);
   }
 }
