@@ -17,11 +17,8 @@ class MoveableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) {
-      return true;
-    } else {
-      return this.y < 120;
-    }
+    if (this instanceof ThrowableObject) return true;
+    else return this.y < 120;
   }
 
   isColliding(mo) {
@@ -43,7 +40,7 @@ class MoveableObject extends DrawableObject {
   hit() {
     this.energy -= 20;
     AudioHub.playOne(AudioHub.PEPE_HURT);
-    if (this.energy < 0) {
+    if (this.energy <= 0) {
       this.energy = 0;
       showLoseScreen();
     } else {
@@ -55,7 +52,7 @@ class MoveableObject extends DrawableObject {
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 2000;
-    return timepassed < 1;
+    return timepassed < 1.5;
   }
 
   isDead() {
@@ -83,8 +80,8 @@ class MoveableObject extends DrawableObject {
   }
 
   jump() {
-    this.speedY = 30;
     AudioHub.playOne(AudioHub.PEPE_JUMP);
+    return (this.speedY = 30);
   }
 
   updateLastBottom() {
@@ -96,7 +93,6 @@ class MoveableObject extends DrawableObject {
     const charBottom = this.ry + this.rh;
     const moTop = mo.ry;
     const fromAbove = this.lastBottom <= moTop && charBottom >= moTop;
-
     return touching && fromAbove;
   }
 

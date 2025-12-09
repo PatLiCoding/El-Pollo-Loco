@@ -4,6 +4,7 @@ class World {
   canvas;
   ctx;
   animationId;
+  intervalIds;
   keyboard;
   camera_x = 0;
   statusBar = [
@@ -18,7 +19,7 @@ class World {
   deadEnemies = [];
   bossTriggered = false;
 
-  constructor(canvas, keyboard, gamesound) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -30,33 +31,41 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawBackground();
+    this.drawStatusBar();
+    this.drawCoinCounter();
+    this.drawLevelObjects();
+    this.animationId = requestAnimationFrame(() => this.draw());
+    this.setWorld();
+  }
 
+  drawBackground() {
     this.ctx.translate(this.camera_x, 0);
-
     this.addObjectToMap(this.level.backgroundObjects);
     this.addObjectToMap(this.level.clouds);
+  }
 
+  drawStatusBar() {
     this.ctx.translate(-this.camera_x, 0);
     this.addObjectToMap(this.statusBar);
+  }
 
+  drawCoinCounter() {
     this.ctx.font = "26px Arial";
     this.ctx.fillStyle = "white";
     this.ctx.drawImage(this.coinImage, 5, 75, 75, 75);
     this.ctx.fillText("x " + this.coinsCollected, 65, 120);
-
     this.ctx.translate(this.camera_x, 0);
+  }
 
+  drawLevelObjects() {
     this.addObjectToMap(this.deadEnemies);
     this.addToMap(this.character);
     this.addObjectToMap(this.level.enemies);
     this.addObjectToMap(this.level.bottle);
     this.addObjectToMap(this.level.coins);
     this.addObjectToMap(this.throwableObjects);
-
     this.ctx.translate(-this.camera_x, 0);
-
-    this.animationId = requestAnimationFrame(() => this.draw());
-    this.setWorld();
   }
 
   setWorld() {
@@ -65,16 +74,17 @@ class World {
 
   run() {
     this.setStoppableInterval(() => {
-      this.checkCollisions();
       this.checkThrowObjects();
     }, 200);
     this.setStoppableInterval(() => {
+      this.checkCollisions();
       this.checkBottle();
-    }, 50);
+    }, 100);
     this.setStoppableInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (enemy.isBoss && !enemy.isDead) {
           if (!this.bossTriggered && this.character.x >= 1500) {
+            enemy.isWalking = true;
             this.bossTriggered = true;
           }
           if (this.bossTriggered) {
@@ -89,12 +99,16 @@ class World {
         }
       });
     }, 1000 / 60);
-    // setInterval(() => {
-    //   setTimeout(() => {
-    //     AudioHub.GAMESOUND.loop = true;
-    //     AudioHub.playOne(AudioHub.GAMESOUND);
-    //   }, 50);
-    // }, 7000);
+    // this.startGamemusic();
+  }
+
+  startGamemusic() {
+    setInterval(() => {
+      setTimeout(() => {
+        AudioHub.GAMESOUND.loop = true;
+        AudioHub.playOne(AudioHub.GAMESOUND);
+      }, 50);
+    }, 7000);
   }
 
   setStoppableInterval(fm, time) {
@@ -254,7 +268,7 @@ class World {
     }
 
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    // mo.drawFrame(this.ctx);
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

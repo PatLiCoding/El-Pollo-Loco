@@ -35,20 +35,28 @@ class ThrowableObject extends MoveableObject {
   throw() {
     this.speedY = 30;
     this.applyGravity();
+    let moveInterval = this.startMoveInterval();
+    this.startAnimInterval(moveInterval);
+  }
 
-    let moveInterval = setInterval(() => {
+  startMoveInterval() {
+    return setInterval(() => {
       this.x += 10;
     }, 25);
+  }
 
+  startAnimInterval(moveInterval) {
     let animInterval = setInterval(() => {
       if (this.isCollidingEnemie || this.isSplashFloor()) {
         this.playAnimation(this.IMAGE_SPLASH);
         this.speedY = 0;
-        clearInterval(moveInterval);
-        clearInterval(animInterval);
-      } else {
-        this.playAnimation(this.IMAGE_ROTATION);
-      }
+        this.stopInterval(moveInterval, animInterval);
+      } else this.playAnimation(this.IMAGE_ROTATION);
     }, 80);
+  }
+
+  stopInterval(moveInterval, animInterval) {
+    clearInterval(moveInterval);
+    clearInterval(animInterval);
   }
 }

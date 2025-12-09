@@ -3,7 +3,6 @@ class Bottle extends MoveableObject {
   width = 50;
   y = 360;
   x = 120;
-
   hasHit = false;
 
   rx;

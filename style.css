@@ -68,8 +68,8 @@ h3 {
   overflow: visible;
 }
 
-.panelWrapperLeftRight,
-.panelWrapperJumpThrow {
+.panelWrapperLeft,
+.panelWrapperRight {
   display: none;
 }
 
@@ -270,19 +270,6 @@ img:hover {
   display: none;
 }
 
-@media only screen and (max-width: 768px) {
-  #gameSection {
-    width: 100%;
-    margin-bottom: 0;
-  }
-}
-
-@media only screen and (max-height: 480px) {
-  #gameSection {
-    height: 100vh;
-  }
-}
-
 @media (hover: none) and (orientation: portrait) {
   #rotatePhoneContainer {
     display: block;
@@ -320,9 +307,10 @@ img:hover {
     display: none;
   }
 
-  .panelWrapperLeftRight,
-  .panelWrapperJumpThrow {
+  .panelWrapperLeft,
+  .panelWrapperRight {
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: 60%;
     transform: translateY(-50%);
@@ -330,11 +318,11 @@ img:hover {
     gap: 8px;
   }
 
-  .panelWrapperLeftRight {
+  .panelWrapperLeft {
     right: 20px;
   }
 
-  .panelWrapperJumpThrow {
+  .panelWrapperRight {
     left: 20px;
   }
 
@@ -348,114 +336,34 @@ img:hover {
 }
 
 @media (hover: none) and (orientation: landscape) and (max-width: 768px) {
-  #gameSection {
-    display: flex;
-    justify-content: center;
-  }
-
   #gameContainer {
     max-width: calc(100vw - 150px);
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 3 / 2;
-    position: relative;
-    overflow: visible;
   }
 
-  .panelWrapperLeftRight,
-  .panelWrapperJumpThrow {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    z-index: 10;
-    gap: 8px;
-  }
-
-  .panelWrapperLeftRight {
+  .panelWrapperLeft {
     right: 10px;
   }
 
-  .panelWrapperJumpThrow {
-    left: 10px;
-  }
-}
-
-@media (hover: none) and (orientation: landscape) and (max-width: 768px) {
-  #gameSection {
-    display: flex;
-    justify-content: center;
-  }
-
-  #gameContainer {
-    max-width: calc(100vw - 150px);
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 3 / 2;
-    position: relative;
-    overflow: visible;
-  }
-
-  .panelWrapperLeftRight,
-  .panelWrapperJumpThrow {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    z-index: 10;
-    gap: 8px;
-  }
-
-  .panelWrapperLeftRight {
-    right: 10px;
-  }
-
-  .panelWrapperJumpThrow {
+  .panelWrapperRight {
     left: 10px;
   }
 }
 
 @media (hover: none) and (orientation: landscape) and (max-width: 420px) {
-  #gameSection {
-    display: flex;
-    justify-content: center;
-  }
-
   #gameContainer {
     max-width: calc(100vw - 100px);
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 3 / 2;
-    position: relative;
-    overflow: visible;
   }
 
-  .panelWrapperLeftRight,
-  .panelWrapperJumpThrow {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    z-index: 10;
-    gap: 8px;
-  }
-
-  .panelWrapperLeftRight {
+  .panelWrapperLeft {
     right: 5px;
   }
 
-  .panelWrapperJumpThrow {
+  .panelWrapperRight {
     left: 5px;
   }
 
   .panelBtn {
     width: 40px;
     height: 40px;
-    font-size: 16px;
-    border-radius: 50%;
-    background-color: rosybrown;
   }
 }
