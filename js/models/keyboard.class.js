@@ -1,22 +1,48 @@
+/**
+ * Handles keyboard and touch input for the game.
+ * Tracks which keys are pressed and manages on-screen button touches.
+ */
 class Keyboard {
+  /** Left arrow key pressed. @type {boolean} */
   LEFT = false;
+
+  /** Right arrow key pressed. @type {boolean} */
   RIGHT = false;
+
+  /** Up arrow key pressed. @type {boolean} */
   UP = false;
+
+  /** Down arrow key pressed. @type {boolean} */
   DOWN = false;
+
+  /** Space key pressed. @type {boolean} */
   SPACE = false;
+
+  /** "D" key pressed (used for throwing objects). @type {boolean} */
   D = false;
+
+  /** Tracks last state of D key for toggle behavior. @type {boolean} */
   lastKeyD = false;
 
+  /**
+   * Initializes keyboard input and binds touch buttons.
+   */
   constructor() {
     this.bindKeyPressEvents();
     this.bindBtsPressEvents();
   }
 
+  /**
+   * Binds keydown and keyup events for the keyboard.
+   */
   bindKeyPressEvents() {
     this.keydown();
     this.keyup();
   }
 
+  /**
+   * Sets up the keydown event listener for arrow keys, space, and "D".
+   */
   keydown() {
     window.addEventListener("keydown", (event) => {
       if (event.keyCode == 39) keyboard.RIGHT = true;
@@ -28,6 +54,9 @@ class Keyboard {
     });
   }
 
+  /**
+   * Sets up the keyup event listener to reset key states.
+   */
   keyup() {
     window.addEventListener("keyup", (event) => {
       if (event.keyCode == 39) keyboard.RIGHT = false;
@@ -39,6 +68,9 @@ class Keyboard {
     });
   }
 
+  /**
+   * Binds on-screen touch button events for mobile devices.
+   */
   bindBtsPressEvents() {
     this.pressLeftBtn();
     this.pressRightBtn();
@@ -46,6 +78,9 @@ class Keyboard {
     this.pressThrowBtn();
   }
 
+  /**
+   * Handles left button touch events.
+   */
   pressLeftBtn() {
     document
       .getElementById("btnLeft")
@@ -60,6 +95,9 @@ class Keyboard {
     });
   }
 
+  /**
+   * Handles right button touch events.
+   */
   pressRightBtn() {
     document
       .getElementById("btnRight")
@@ -76,6 +114,9 @@ class Keyboard {
       });
   }
 
+  /**
+   * Handles jump button touch events.
+   */
   pressJumpBtn() {
     document
       .getElementById("btnJump")
@@ -90,6 +131,9 @@ class Keyboard {
     });
   }
 
+  /**
+   * Handles throw button touch events with toggle logic.
+   */
   pressThrowBtn() {
     document
       .getElementById("btnThrow")
@@ -106,6 +150,10 @@ class Keyboard {
       });
   }
 
+  /**
+   * Toggles the D key state for throwing objects.
+   * Ensures only one throw per button press.
+   */
   checkLastKeyD() {
     if (!this.lastKeyD) {
       this.D = true;

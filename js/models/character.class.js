@@ -1,8 +1,38 @@
+/**
+ * Represents the main player character (Pepe) in the game.
+ * Handles movement, animations, gravity, and interaction with the game world.
+ *
+ * @extends MoveableObject
+ */
 class Character extends MoveableObject {
+  /**
+   * Horizontal position of the character in the world.
+   * @type {number}
+   */
   x = 60;
+
+  /**
+   * Vertical position of the character in the world.
+   * @type {number}
+   */
   y = 140;
+
+  /**
+   * Character height in pixels.
+   * @type {number}
+   */
   height = 300;
+
+  /**
+   * Movement speed of the character.
+   * @type {number}
+   */
   speed = 10;
+
+  /**
+   * Walking animation frames.
+   * @type {string[]}
+   */
   IMAGES_WALKING = [
     "./assets/img/2_character_pepe/2_walk/W-21.png",
     "./assets/img/2_character_pepe/2_walk/W-22.png",
@@ -11,6 +41,11 @@ class Character extends MoveableObject {
     "./assets/img/2_character_pepe/2_walk/W-25.png",
     "./assets/img/2_character_pepe/2_walk/W-26.png",
   ];
+
+  /**
+   * Jumping animation frames.
+   * @type {string[]}
+   */
   IMAGES_JUMPING = [
     "./assets/img/2_character_pepe/3_jump/J-31.png",
     "./assets/img/2_character_pepe/3_jump/J-32.png",
@@ -22,6 +57,11 @@ class Character extends MoveableObject {
     "./assets/img/2_character_pepe/3_jump/J-38.png",
     "./assets/img/2_character_pepe/3_jump/J-39.png",
   ];
+
+  /**
+   * Death animation frames.
+   * @type {string[]}
+   */
   IMAGES_DEAD = [
     "./assets/img/2_character_pepe/5_dead/D-51.png",
     "./assets/img/2_character_pepe/5_dead/D-52.png",
@@ -31,11 +71,21 @@ class Character extends MoveableObject {
     "./assets/img/2_character_pepe/5_dead/D-56.png",
     "./assets/img/2_character_pepe/5_dead/D-57.png",
   ];
+
+  /**
+   * Hurt animation frames.
+   * @type {string[]}
+   */
   IMAGES_HURT = [
     "./assets/img/2_character_pepe/4_hurt/H-41.png",
     "./assets/img/2_character_pepe/4_hurt/H-42.png",
     "./assets/img/2_character_pepe/4_hurt/H-43.png",
   ];
+
+  /**
+   * Idle animation frames.
+   * @type {string[]}
+   */
   IMAGES_IDLE = [
     "./assets/img/2_character_pepe/1_idle/idle/I-1.png",
     "./assets/img/2_character_pepe/1_idle/idle/I-2.png",
@@ -48,6 +98,11 @@ class Character extends MoveableObject {
     "./assets/img/2_character_pepe/1_idle/idle/I-9.png",
     "./assets/img/2_character_pepe/1_idle/idle/I-10.png",
   ];
+
+  /**
+   * Long idle (sleeping) animation frames.
+   * @type {string[]}
+   */
   IMAGES_LONG_IDLE = [
     "./assets/img/2_character_pepe/1_idle/long_idle/I-11.png",
     "./assets/img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -60,19 +115,71 @@ class Character extends MoveableObject {
     "./assets/img/2_character_pepe/1_idle/long_idle/I-19.png",
     "./assets/img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
+
+  /**
+   * Current frame index for animations.
+   * @type {number}
+   */
   currentImage = 0;
+
+  /**
+   * Reference to the game world the character belongs to.
+   * @type {World}
+   */
   world;
+
+  /**
+   * Timestamp of the last action performed by the character.
+   * Used for idle/sleep detection.
+   * @type {number}
+   */
   lastActionTime = new Date().getTime();
+
+  /**
+   * Timeout in milliseconds before switching to long idle (sleeping) animation.
+   * @type {number}
+   */
   idleTimeout = 5000;
+
+  /**
+   * Indicates if the character is currently sleeping.
+   * @type {boolean}
+   */
   sleeping = false;
 
+  /**
+   * Real hitbox X coordinate.
+   * @type {number}
+   */
   rx;
+
+  /**
+   * Real hitbox Y coordinate.
+   * @type {number}
+   */
   ry;
+
+  /**
+   * Real hitbox width.
+   * @type {number}
+   */
   rw;
+
+  /**
+   * Real hitbox height.
+   * @type {number}
+   */
   rh;
 
+  /**
+   * Collision hitbox offsets.
+   * @type {{top: number, right: number, bottom: number, left: number}}
+   */
   offset = { top: 120, right: 28, bottom: 10, left: 20 };
 
+  /**
+   * Initializes the character with default image and loads all animations.
+   */
   constructor() {
     super();
     this.loadImage("./assets/img/2_character_pepe/2_walk/W-21.png");
@@ -87,6 +194,9 @@ class Character extends MoveableObject {
     this.getRealFrame();
   }
 
+  /**
+   * Handles character movement and camera updates.
+   */
   animate() {
     setInterval(() => {
       if (this.isMoveRight()) this.moveRight();
@@ -100,6 +210,9 @@ class Character extends MoveableObject {
     }, 80);
   }
 
+  /**
+   * Determines which animation to play based on character state.
+   */
   playAnimation() {
     if (this.isDead()) super.playAnimation(this.IMAGES_DEAD);
     else if (this.isHurt()) super.playAnimation(this.IMAGES_HURT);
@@ -109,29 +222,51 @@ class Character extends MoveableObject {
     else super.playAnimation(this.IMAGES_IDLE);
   }
 
+  /**
+   * Checks if the character is moving horizontally.
+   * @returns {boolean}
+   */
   isMoving() {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
+  /**
+   * Checks if the character can move right.
+   * @returns {boolean}
+   */
   isMoveRight() {
     return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
   }
 
+  /**
+   * Moves the character to the right and updates last action time.
+   */
   moveRight() {
     super.moveRight();
     this.updateLastActioTime();
   }
 
+  /**
+   * Checks if the character can move left.
+   * @returns {boolean}
+   */
   isMoveLeft() {
     return this.world.keyboard.LEFT && this.x > 0;
   }
 
+  /**
+   * Moves the character to the left and updates last action time.
+   */
   moveLeft() {
     this.otherDirection = true;
     super.moveLeft();
     this.updateLastActioTime();
   }
 
+  /**
+   * Checks if the character should jump.
+   * @returns {boolean}
+   */
   isJump() {
     return (
       (this.world.keyboard.UP || this.world.keyboard.SPACE) &&
@@ -139,15 +274,25 @@ class Character extends MoveableObject {
     );
   }
 
+  /**
+   * Makes the character jump and updates last action time.
+   */
   jump() {
     super.jump();
     this.updateLastActioTime();
   }
 
+  /**
+   * Updates the timestamp of the last action.
+   */
   updateLastActioTime() {
     this.lastActionTime = new Date().getTime();
   }
 
+  /**
+   * Updates the camera position based on the character's X position.
+   * @returns {number} The new camera X position
+   */
   updateCamera() {
     return (this.world.camera_x = -this.x + 100);
   }

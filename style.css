@@ -122,6 +122,34 @@ canvas {
   padding-top: 32px;
 }
 
+#impressumCotainer {
+  display: none;
+  background-image: url("assets/img/5_background/first_half_background.png");
+  background-color: rgb(134, 207, 235);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 100%;
+  width: 100%;
+}
+
+#impressumContant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  padding-top: 32px;
+}
+
+p {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 20px;
+  text-align: center;
+}
+
 table {
   color: rgb(251, 249, 249);
   text-shadow: 2px 2px 4px #000000;
