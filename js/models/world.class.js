@@ -82,7 +82,7 @@ class World {
       this.checkBottle();
     }, 100);
     this.setStoppableInterval(() => this.checkStartBossFight(), 1000 / 60);
-    // this.startGamemusic();
+    this.startGamemusic();
   }
 
   checkIsSleeping() {
@@ -217,26 +217,32 @@ class World {
   }
 
   checkThrowObjects() {
-    if (
-      this.keyboard.D &&
-      !this.lastKeyD &&
-      this.statusBar[1].percentage >= 20
-    ) {
+    if (this.checkPossibleThrow()) {
       this.lastKeyD = true;
-      if (this.character.otherDirection) {
-        this.character.x - 50;
-        this.character.otherDirection = !this.character.otherDirection;
-      }
-      let bottle = new ThrowableObject(
-        this.character.x + 50,
-        this.character.y + 120
-      );
-      this.throwableObjects.push(bottle);
-      this.statusBar[1].setPercentage(this.statusBar[1].percentage - 20);
+      if (this.character.otherDirection) this.flipCharacterForThrow();
+      this.throwBottle();
     }
-    if (!this.keyboard.D) {
-      this.lastKeyD = false;
-    }
+    if (!this.keyboard.D) this.lastKeyD = false;
+  }
+
+  checkPossibleThrow() {
+    return (
+      this.keyboard.D && !this.lastKeyD && this.statusBar[1].percentage >= 20
+    );
+  }
+
+  flipCharacterForThrow() {
+    this.character.x - 50;
+    this.character.otherDirection = !this.character.otherDirection;
+  }
+
+  throwBottle() {
+    let bottle = new ThrowableObject(
+      this.character.x + 50,
+      this.character.y + 120
+    );
+    this.throwableObjects.push(bottle);
+    this.statusBar[1].setPercentage(this.statusBar[1].percentage - 20);
   }
 
   checkBottle() {
@@ -321,7 +327,7 @@ class World {
   spliceBottle(bottle, bottleIndex) {
     setTimeout(() => {
       this.throwableObjects.splice(bottleIndex, 1);
-    }, bottle.IMAGE_SPLASH.length * 80);
+    }, bottle.IMAGE_SPLASH.length * 40);
   }
 
   addObjectToMap(objects) {
