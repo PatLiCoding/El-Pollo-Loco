@@ -33,7 +33,7 @@ class Endboss extends MoveableObject {
   otherDirection = false;
 
   /** Speed of the boss movement. @type {number} */
-  speed = 3.5;
+  speed = 4.5;
 
   /** Animation frames for alert state. @type {string[]} */
   IMAGES_ALERT = [
@@ -111,7 +111,7 @@ class Endboss extends MoveableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ATTACK);
-    this.x = 2000;
+    this.x = 3800;
     this.animate();
     this.getRealFrame();
     this.energy = 100;

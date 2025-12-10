@@ -18,7 +18,7 @@ class Level {
   coins;
 
   /** X coordinate marking the end of the level. @type {number} */
-  level_end_x = 2200;
+  level_end_x = 4000;
 
   /**
    * Creates a new Level instance.

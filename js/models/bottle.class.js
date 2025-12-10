@@ -75,7 +75,7 @@ class Bottle extends MoveableObject {
   constructor(imagePath) {
     super();
     this.loadImage(imagePath);
-    this.x = 100 + Math.random() * 1500; // random x position in the world
+    this.x = 100 + Math.random() * 3300; // random x position in the world
     this.getRealFrame(); // calculate real hitbox dimensions
   }
 }

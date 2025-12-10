@@ -24,6 +24,14 @@ function initLevel1() {
       new Chicken(),
       new Chicken(),
       new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new Chicken(),
+      new SmallChicken(),
+      new SmallChicken(),
+      new SmallChicken(),
       new SmallChicken(),
       new SmallChicken(),
       new SmallChicken(),
@@ -34,7 +42,21 @@ function initLevel1() {
      * Cloud objects used in the level.
      * @type {Cloud[]}
      */
-    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
+    [
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+      new Cloud(),
+    ],
 
     /**
      * Parallax background objects.
@@ -113,16 +135,42 @@ function initLevel1() {
       ),
       new BackgroundObject("./assets/img/5_background/layers/air.png", 720 * 4),
       new BackgroundObject(
-        "./assets/img/5_background/layers/3_third_layer/2.png",
+        "./assets/img/5_background/layers/3_third_layer/1.png",
         720 * 4
+      ),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/2_second_layer/1.png",
+        720 * 4
+      ),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/1_first_layer/1.png",
+        720 * 4
+      ),
+      new BackgroundObject("./assets/img/5_background/layers/air.png", 720 * 5),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/3_third_layer/2.png",
+        720 * 5
       ),
       new BackgroundObject(
         "./assets/img/5_background/layers/2_second_layer/2.png",
-        720 * 4
+        720 * 5
       ),
       new BackgroundObject(
         "./assets/img/5_background/layers/1_first_layer/2.png",
-        720 * 4
+        720 * 5
+      ),
+      new BackgroundObject("./assets/img/5_background/layers/air.png", 720 * 6),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/3_third_layer/1.png",
+        720 * 6
+      ),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/2_second_layer/1.png",
+        720 * 6
+      ),
+      new BackgroundObject(
+        "./assets/img/5_background/layers/1_first_layer/1.png",
+        720 * 6
       ),
     ],
 
@@ -139,6 +187,11 @@ function initLevel1() {
       new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
       new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
       new Bottle("assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
+      new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new Bottle("assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
+      new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new Bottle("assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new Bottle("assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
     ],
 
     /**
@@ -146,6 +199,12 @@ function initLevel1() {
      * @type {Coins[]}
      */
     [
+      new Coins(),
+      new Coins(),
+      new Coins(),
+      new Coins(),
+      new Coins(),
+      new Coins(),
       new Coins(),
       new Coins(),
       new Coins(),

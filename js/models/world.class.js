@@ -185,7 +185,7 @@ class World {
    * @returns {boolean} True if the boss fight should be triggered.
    */
   checkCharacterIsNear() {
-    return !this.bossTriggered && this.character.x >= 1500;
+    return !this.bossTriggered && this.character.x >= 3400;
   }
 
   /**
@@ -590,11 +590,11 @@ class World {
   }
 
   /**
+   * Adds a dead enemy sprite to the deadEnemies array for rendering
+   * after its death animation.
    *
-   *
-   * @param {Enemy} enemy - The original enemy.
-   *
-   * @memberOf World
+   * @param {DrawableObject} dead - The drawable dead enemy object (e.g. corpse sprite).
+   * @param {Enemy} enemy - The original enemy that died.
    */
   killedEnemies(enemy) {
     const dead = new DrawableObject();
