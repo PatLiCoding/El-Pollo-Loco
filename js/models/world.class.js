@@ -225,7 +225,7 @@ class World {
     cancelAnimationFrame(this.animationId);
     intervalIds.forEach(clearInterval);
     this.keyboard = [];
-    AudioHub.stopAll(AudioHub.GAMESOUND);
+    AudioHub.stopOne(AudioHub.GAMESOUND);
   }
 
   /**
@@ -243,12 +243,12 @@ class World {
    * Checks collisions between the character and enemies.
    */
   checkCollisionEnemies() {
-    this.level.enemies.forEach((enemy, index) => {
+    this.level.enemies.forEach((enemy, enemyIndex) => {
       enemy.getRealFrame();
       if (this.character.isJumpOn(enemy)) {
         if (!enemy.isBoss) {
           this.killedEnemies(enemy);
-          this.spliceDeadChicken(index);
+          this.spliceDeadChicken(enemy, enemyIndex);
         }
       }
       if (!this.character.isHurt()) {
@@ -267,9 +267,10 @@ class World {
    * Removes a dead chicken and applies bounce effect.
    * @param {number} index - Index of the dead enemy in the array.
    */
-  spliceDeadChicken(index) {
-    this.level.enemies.splice(index, 1);
-    this.character.speedY = 25;
+  spliceDeadChicken(enemy, enemyIndex) {
+    if (enemy.isBoss) return;
+    if (!enemy.isBoss) this.level.enemies.splice(enemyIndex, 1);
+    if (this.character.isJumpOn(enemy)) this.character.speedY = 25;
     AudioHub.playOne(AudioHub.ENEMY_HURT);
   }
 
@@ -409,7 +410,7 @@ class World {
       enemy.getRealFrame();
       if (!bottle.hasHit && this.isBottleHitEnemy(bottle, enemy)) {
         this.bottleSplash(bottle);
-        if (!enemy.isBoss) this.chickenIsHitPushback(enemy, bottle);
+        // if (!enemy.isBoss) this.spliceDeadChicken(enemy, enemyIndex);
         if (enemy.isBoss) this.bossIsHit(enemy);
         else this.chickenIsHit(enemy, bottle, enemyIndex);
         this.spliceBottle(bottle, bottleIndex);
@@ -430,23 +431,6 @@ class World {
       bottle.ry + bottle.rh > enemy.ry &&
       bottle.ry < enemy.ry + enemy.rh
     );
-  }
-
-  /**
-   * Applies a pushback effect to a chicken enemy when hit by a bottle.
-   * Pushes the enemy away from the bottle's impact direction and sets
-   * the enemy into a temporary hurt state.
-   *
-   * @param {Enemy} enemy - The enemy that was hit.
-   * @param {ThrowableObject} bottle - The thrown bottle that caused the hit.
-   */
-  chickenIsHitPushback(enemy, bottle) {
-    const pushbackDirection = bottle.x < enemy.x ? 1 : -1;
-    enemy.x += pushbackDirection * 20;
-    enemy.isHurt = true;
-    setTimeout(() => {
-      enemy.isHurt = false;
-    }, 150);
   }
 
   /**
@@ -481,6 +465,7 @@ class World {
    * @param {number} enemyIndex - Index of the enemy in the level enemies array.
    */
   chickenIsHit(enemy, bottle, enemyIndex) {
+    this.spliceDeadChicken(enemy, enemyIndex);
     this.killedEnemies(enemy);
     this.isSplashEnemy(bottle, enemyIndex);
   }
