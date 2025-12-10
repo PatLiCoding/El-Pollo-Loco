@@ -229,8 +229,11 @@ class Character extends MoveableObject {
   }
 
   /**
-   * Checks if the character is moving horizontally.
-   * @returns {boolean}
+   * Checks whether the character is currently moving horizontally.
+   * Returns false while the jump animation is playing to prevent
+   * movement animation from overriding the jump sequence.
+   *
+   * @returns {boolean|undefined} True if moving left or right, undefined if jumping animation is active.
    */
   isMoving() {
     if (this.isJumpingAnimation) return;
@@ -291,6 +294,10 @@ class Character extends MoveableObject {
     this.updateLastActioTime();
   }
 
+  /**
+   * Handles the progression of the jump animation.
+   * Resets animation state once all jump frames have been displayed.
+   */
   jumpingAnimation() {
     if (this.currentImage >= this.IMAGES_JUMPING.length) {
       this.isJumpingAnimation = false;

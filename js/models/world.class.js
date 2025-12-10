@@ -134,7 +134,7 @@ class World {
       this.checkBottle();
     }, 100);
     this.setStoppableInterval(() => this.checkStartBossFight(), 1000 / 60);
-    // this.startGamemusic();
+    AudioHub.playOne(AudioHub.GAMESOUND);
   }
 
   /**
@@ -209,18 +209,6 @@ class World {
   }
 
   /**
-   * Starts the game background music loop.
-   */
-  startGamemusic() {
-    setInterval(() => {
-      setTimeout(() => {
-        AudioHub.GAMESOUND.loop = true;
-        AudioHub.playOne(AudioHub.GAMESOUND);
-      }, 50);
-    }, 7000);
-  }
-
-  /**
    * Creates a stoppable interval and stores its ID for later clearing.
    * @param {Function} fm - The function to execute.
    * @param {number} time - Interval duration in milliseconds.
@@ -237,6 +225,7 @@ class World {
     cancelAnimationFrame(this.animationId);
     intervalIds.forEach(clearInterval);
     this.keyboard = [];
+    AudioHub.stopAll(AudioHub.GAMESOUND);
   }
 
   /**
@@ -444,12 +433,12 @@ class World {
   }
 
   /**
+   * Applies a pushback effect to a chicken enemy when hit by a bottle.
+   * Pushes the enemy away from the bottle's impact direction and sets
+   * the enemy into a temporary hurt state.
    *
-   *
-   * @param {any} enemy
-   * @param {any} bottle
-   *
-   * @memberOf World
+   * @param {Enemy} enemy - The enemy that was hit.
+   * @param {ThrowableObject} bottle - The thrown bottle that caused the hit.
    */
   chickenIsHitPushback(enemy, bottle) {
     const pushbackDirection = bottle.x < enemy.x ? 1 : -1;
@@ -494,13 +483,6 @@ class World {
   chickenIsHit(enemy, bottle, enemyIndex) {
     this.killedEnemies(enemy);
     this.isSplashEnemy(bottle, enemyIndex);
-    // if (enemy.isSmallChicken) {
-    //   this.killedSmallChicken(enemy);
-    //   this.isSplashEnemy(bottle, enemyIndex);
-    // } else {
-    //   this.KilledChicken(enemy);
-    //   this.isSplashEnemy(bottle, enemyIndex);
-    // }
   }
 
   /**
