@@ -233,6 +233,7 @@ class World {
     this.keyboard = [];
     this.character.gameEnd = true;
     AudioHub.stopOne(AudioHub.GAMESOUND);
+    AudioHub.stopOne(AudioHub.PEPE_SLEEPING);
   }
 
   /**
