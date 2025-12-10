@@ -477,9 +477,9 @@ class World {
    * @param {Enemy} enemy - The boss enemy.
    */
   bossIsHit(enemy) {
-    enemy.energy -= 20;
+    enemy.energy -= 10;
     this.statusBar[2].setPercentage(enemy.energy);
-    if (enemy.energy > 0) {
+    if (enemy.energy > 10) {
       enemy.isHurt = true;
       enemy.currentImage = 0;
       AudioHub.playOne(AudioHub.ENEMY_BOSS_ATTACK);
