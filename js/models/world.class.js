@@ -152,8 +152,10 @@ class World {
    * Starts sleeping state and plays sleeping audio.
    */
   startSleeping() {
-    AudioHub.playOne(AudioHub.PEPE_SLEEPING);
-    this.character.sleeping = true;
+    if (!this.character.gameEnd) {
+      AudioHub.playOne(AudioHub.PEPE_SLEEPING);
+      this.character.sleeping = true;
+    } else return;
   }
 
   /**
@@ -199,12 +201,16 @@ class World {
    * @param {Enemy} enemy - The boss enemy.
    */
   bossMoving(enemy) {
-    if (enemy.x < this.character.x) {
-      enemy.moveRight();
-      enemy.otherDirection = true;
-    } else if (enemy.x > this.character.x) {
-      enemy.moveLeft();
-      enemy.otherDirection = false;
+    const distance = this.character.x - enemy.x;
+    const moveSpeed = 2;
+    if (Math.abs(distance) > moveSpeed) {
+      if (distance > 0) {
+        enemy.moveRight();
+        enemy.otherDirection = true;
+      } else {
+        enemy.moveLeft();
+        enemy.otherDirection = false;
+      }
     }
   }
 
@@ -225,6 +231,7 @@ class World {
     cancelAnimationFrame(this.animationId);
     intervalIds.forEach(clearInterval);
     this.keyboard = [];
+    this.character.gameEnd = true;
     AudioHub.stopOne(AudioHub.GAMESOUND);
   }
 
@@ -410,7 +417,6 @@ class World {
       enemy.getRealFrame();
       if (!bottle.hasHit && this.isBottleHitEnemy(bottle, enemy)) {
         this.bottleSplash(bottle);
-        // if (!enemy.isBoss) this.spliceDeadChicken(enemy, enemyIndex);
         if (enemy.isBoss) this.bossIsHit(enemy);
         else this.chickenIsHit(enemy, bottle, enemyIndex);
         this.spliceBottle(bottle, bottleIndex);

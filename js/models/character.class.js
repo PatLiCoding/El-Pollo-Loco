@@ -29,6 +29,8 @@ class Character extends MoveableObject {
    */
   speed = 10;
 
+  gameEnd = false;
+
   /**
    * Walking animation frames.
    * @type {string[]}

@@ -48,7 +48,8 @@ class ThrowableObject extends MoveableObject {
 
   /** Initiates the throw, including gravity, movement, and animation. */
   throw() {
-    this.speedY = 30;
+    this.speedY = 20;
+    this.acceleration = 2;
     this.applyGravity();
     let moveInterval = this.startMoveInterval();
     this.startAnimInterval(moveInterval);

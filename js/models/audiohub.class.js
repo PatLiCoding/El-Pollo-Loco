@@ -143,5 +143,6 @@ class AudioHub {
    */
   static unmute() {
     AudioHub.isMuted = false;
+    AudioHub.playOne(AudioHub.GAMESOUND);
   }
 }
