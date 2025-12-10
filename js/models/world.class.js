@@ -259,11 +259,18 @@ class World {
   checkCollisionEnemies() {
     this.level.enemies.forEach((enemy, index) => {
       enemy.getRealFrame();
-      if (this.character.isJumpOn(enemy)) this.spliceDeadChicken(index);
+      if (this.character.isJumpOn(enemy)) {
+        this.killedEnemies(enemy);
+        this.spliceDeadChicken(index);
+      }
       if (!this.character.isHurt()) {
-        if (this.character.isColliding(enemy) && enemy.isBoss)
-          this.isAttackByBoss(enemy);
-        if (this.character.isColliding(enemy)) this.EnemieHurtCharacter();
+        if (
+          !this.character.isJumpOn(enemy) &&
+          this.character.isColliding(enemy)
+        ) {
+          if (enemy.isBoss) this.isAttackByBoss(enemy);
+          else this.EnemieHurtCharacter();
+        }
       }
     });
   }
@@ -414,6 +421,7 @@ class World {
       enemy.getRealFrame();
       if (!bottle.hasHit && this.isBottleHitEnemy(bottle, enemy)) {
         this.bottleSplash(bottle);
+        if (!enemy.isBoss) this.chickenIsHitPushback(enemy, bottle);
         if (enemy.isBoss) this.bossIsHit(enemy);
         else this.chickenIsHit(enemy, bottle, enemyIndex);
         this.spliceBottle(bottle, bottleIndex);
@@ -429,11 +437,28 @@ class World {
    */
   isBottleHitEnemy(bottle, enemy) {
     return (
-      bottle.rx + bottle.width > enemy.rx &&
-      bottle.rx < enemy.rx + enemy.width &&
-      bottle.ry + bottle.height > enemy.ry &&
-      bottle.ry < enemy.ry + enemy.height
+      bottle.rx + bottle.rw > enemy.rx &&
+      bottle.rx < enemy.rx + enemy.rw &&
+      bottle.ry + bottle.rh > enemy.ry &&
+      bottle.ry < enemy.ry + enemy.rh
     );
+  }
+
+  /**
+   *
+   *
+   * @param {any} enemy
+   * @param {any} bottle
+   *
+   * @memberOf World
+   */
+  chickenIsHitPushback(enemy, bottle) {
+    const pushbackDirection = bottle.x < enemy.x ? 1 : -1;
+    enemy.x += pushbackDirection * 20;
+    enemy.isHurt = true;
+    setTimeout(() => {
+      enemy.isHurt = false;
+    }, 150);
   }
 
   /**
