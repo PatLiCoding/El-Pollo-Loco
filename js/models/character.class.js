@@ -147,6 +147,8 @@ class Character extends MoveableObject {
    */
   sleeping = false;
 
+  isJumpingAnimation = false;
+
   /**
    * Real hitbox X coordinate.
    * @type {number}
@@ -207,16 +209,20 @@ class Character extends MoveableObject {
 
     setInterval(() => {
       this.playAnimation();
-    }, 80);
+    }, 120);
   }
 
   /**
    * Determines which animation to play based on character state.
    */
   playAnimation() {
+    if (this.isJumpingAnimation) {
+      super.playAnimation(this.IMAGES_JUMPING);
+      this.jumpingAnimation();
+      return;
+    }
     if (this.isDead()) super.playAnimation(this.IMAGES_DEAD);
     else if (this.isHurt()) super.playAnimation(this.IMAGES_HURT);
-    else if (this.isAboveGround()) super.playAnimation(this.IMAGES_JUMPING);
     else if (this.isSleeping()) super.playAnimation(this.IMAGES_LONG_IDLE);
     else if (this.isMoving()) super.playAnimation(this.IMAGES_WALKING);
     else super.playAnimation(this.IMAGES_IDLE);
@@ -227,7 +233,8 @@ class Character extends MoveableObject {
    * @returns {boolean}
    */
   isMoving() {
-    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    if (this.isJumpingAnimation) return;
+    else return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
   /**
@@ -279,7 +286,16 @@ class Character extends MoveableObject {
    */
   jump() {
     super.jump();
+    this.isJumpingAnimation = true;
+    this.currentImage = 0;
     this.updateLastActioTime();
+  }
+
+  jumpingAnimation() {
+    if (this.currentImage >= this.IMAGES_JUMPING.length) {
+      this.isJumpingAnimation = false;
+      this.currentImage = 0;
+    }
   }
 
   /**

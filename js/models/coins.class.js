@@ -78,7 +78,7 @@ class Coins extends MoveableObject {
     super();
     this.loadImage(this.IMAGES[0]);
     this.loadImages(this.IMAGES);
-    this.x = 300 + Math.random() * 3500; // random horizontal position
+    this.x = 300 + Math.random() * 3000; // random horizontal position
     this.y = 80 + Math.random() * 240; // random vertical position
     this.animate();
     this.getRealFrame(); // calculate hitbox

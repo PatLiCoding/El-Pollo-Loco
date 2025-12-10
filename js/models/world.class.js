@@ -27,11 +27,7 @@ class World {
   camera_x = 0;
 
   /** @type {Array<StatusBar>} Array of status bars: health, bottles, boss health. */
-  statusBar = [
-    new StatusBarHealth(),
-    new StatusBarBottle(),
-    new StatusBarBoss(),
-  ];
+  statusBar = [new StatusBarHealth(), new StatusBarBottle()];
 
   /** @type {Array<ThrowableObject>} Array of bottles thrown by the character. */
   throwableObjects = [];
@@ -185,7 +181,7 @@ class World {
    * @returns {boolean} True if the boss fight should be triggered.
    */
   checkCharacterIsNear() {
-    return !this.bossTriggered && this.character.x >= 3400;
+    return !this.bossTriggered && this.character.x >= 3300;
   }
 
   /**
@@ -195,6 +191,7 @@ class World {
   bossIsTriggered(enemy) {
     enemy.isWalking = true;
     this.bossTriggered = true;
+    this.statusBar.push(new StatusBarBoss());
   }
 
   /**
@@ -260,8 +257,10 @@ class World {
     this.level.enemies.forEach((enemy, index) => {
       enemy.getRealFrame();
       if (this.character.isJumpOn(enemy)) {
-        this.killedEnemies(enemy);
-        this.spliceDeadChicken(index);
+        if (!enemy.isBoss) {
+          this.killedEnemies(enemy);
+          this.spliceDeadChicken(index);
+        }
       }
       if (!this.character.isHurt()) {
         if (
