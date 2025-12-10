@@ -138,7 +138,7 @@ class World {
       this.checkBottle();
     }, 100);
     this.setStoppableInterval(() => this.checkStartBossFight(), 1000 / 60);
-    this.startGamemusic();
+    // this.startGamemusic();
   }
 
   /**
@@ -259,14 +259,12 @@ class World {
   checkCollisionEnemies() {
     this.level.enemies.forEach((enemy, index) => {
       enemy.getRealFrame();
-      if (this.character.isJumpOn(enemy)) {
-        if (enemy.isSmallChicken) this.killedSmallChicken(enemy);
-        else this.KilledChicken(enemy);
-        this.spliceDeadChicken(index);
-      } else if (this.character.isColliding(enemy) && enemy.isBoss) {
-        this.isAttackByBoss(enemy);
-        this.EnemieHurtCharacter();
-      } else if (this.character.isColliding(enemy)) this.EnemieHurtCharacter();
+      if (this.character.isJumpOn(enemy)) this.spliceDeadChicken(index);
+      if (!this.character.isHurt()) {
+        if (this.character.isColliding(enemy) && enemy.isBoss)
+          this.isAttackByBoss(enemy);
+        if (this.character.isColliding(enemy)) this.EnemieHurtCharacter();
+      }
     });
   }
 
@@ -288,6 +286,7 @@ class World {
     enemy.isAttack = true;
     enemy.currentImage = 0;
     AudioHub.playOne(AudioHub.ENEMY_BOSS_ATTACK);
+    this.EnemieHurtCharacter();
   }
 
   /**
@@ -383,8 +382,8 @@ class World {
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       bottle.getRealFrame();
       if (bottle.hasHit) return;
-      if (this.checkSplashFloor() && !bottle.bottleOnFloor)
-        this.isSplashFloor();
+      if (this.checkSplashFloor(bottle) && !bottle.bottleOnFloor)
+        this.isSplashFloor(bottle);
       this.checkBottleEnemies(bottle, bottleIndex);
     });
   }
@@ -393,14 +392,14 @@ class World {
    * Checks if a bottle hits the floor.
    * @returns {boolean} True if the bottle reaches floor height.
    */
-  checkSplashFloor() {
-    return this.ry + this.height >= 340;
+  checkSplashFloor(bottle) {
+    return bottle.y + bottle.height >= 340;
   }
 
   /**
    * Handles a bottle hitting the floor: sets the state and plays smash sound.
    */
-  isSplashFloor() {
+  isSplashFloor(bottle) {
     bottle.bottleOnFloor = true;
     AudioHub.playOne(AudioHub.BOTTLE_SMASH);
   }
@@ -469,13 +468,15 @@ class World {
    * @param {number} enemyIndex - Index of the enemy in the level enemies array.
    */
   chickenIsHit(enemy, bottle, enemyIndex) {
-    if (enemy.isSmallChicken) {
-      this.killedSmallChicken(enemy);
-      this.isSplashEnemy(bottle, enemyIndex);
-    } else {
-      this.KilledChicken(enemy);
-      this.isSplashEnemy(bottle, enemyIndex);
-    }
+    this.killedEnemies(enemy);
+    this.isSplashEnemy(bottle, enemyIndex);
+    // if (enemy.isSmallChicken) {
+    //   this.killedSmallChicken(enemy);
+    //   this.isSplashEnemy(bottle, enemyIndex);
+    // } else {
+    //   this.KilledChicken(enemy);
+    //   this.isSplashEnemy(bottle, enemyIndex);
+    // }
   }
 
   /**
@@ -564,36 +565,24 @@ class World {
   }
 
   /**
-   * Marks a chicken as dead and adds it to the deadEnemies array.
-   * @param {Enemy} enemy - The chicken enemy.
+   *
+   *
+   * @param {Enemy} enemy - The original enemy.
+   *
+   * @memberOf World
    */
-  KilledChicken(enemy) {
+  killedEnemies(enemy) {
     const dead = new DrawableObject();
-    dead.loadImage(
-      "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-    );
-    this.pushToDeadEnemyArray(dead, enemy);
-  }
-
-  /**
-   * Marks the boss as dead and adds it to the deadEnemies array.
-   * @param {Enemy} enemy - The boss enemy.
-   */
-  killedBoss(enemy) {
-    const dead = new DrawableObject();
-    dead.loadImage("assets/img/4_enemie_boss_chicken/5_dead/G26.png");
-    this.pushToDeadEnemyArray(dead, enemy);
-  }
-
-  /**
-   * Marks a small chicken as dead and adds it to the deadEnemies array.
-   * @param {Enemy} enemy - The small chicken enemy.
-   */
-  killedSmallChicken(enemy) {
-    const dead = new DrawableObject();
-    dead.loadImage(
-      "assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"
-    );
+    if (enemy.isBoss)
+      dead.loadImage("assets/img/4_enemie_boss_chicken/5_dead/G26.png");
+    if (enemy.isSmallChicken)
+      dead.loadImage(
+        "assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+      );
+    else
+      dead.loadImage(
+        "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+      );
     this.pushToDeadEnemyArray(dead, enemy);
   }
 }

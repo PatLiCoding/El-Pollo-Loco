@@ -93,9 +93,8 @@ canvas {
 
 #startContant {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
   height: 100%;
   width: 100%;
@@ -148,13 +147,19 @@ p {
   text-shadow: 2px 2px 4px #000000;
   font-size: 20px;
   text-align: center;
+  padding: 24px 16px;
+  border-radius: 15px;
+  background-color: #00000080;
 }
 
 table {
   color: rgb(251, 249, 249);
   text-shadow: 2px 2px 4px #000000;
   font-size: 20px;
-  width: 350px;
+  width: 400px;
+  padding: 24px 16px;
+  border-radius: 15px;
+  background-color: #00000080;
 }
 
 tr {
@@ -271,11 +276,11 @@ img:hover {
   padding: 16px 16px;
   color: aliceblue;
   text-shadow: 2px 2px 4px #000000;
-  background-color: rgb(245, 182, 93, 0.8);
+  background-color: rgb(245, 182, 93);
   border-radius: 25px;
   border: none;
   transition: all 125ms ease-in;
-  width: 10rem;
+  width: 9rem;
   margin-bottom: 16px;
 }
 
@@ -343,7 +348,7 @@ img:hover {
     top: 60%;
     transform: translateY(-50%);
     z-index: 10;
-    gap: 8px;
+    gap: 16px;
   }
 
   .panelWrapperLeft {

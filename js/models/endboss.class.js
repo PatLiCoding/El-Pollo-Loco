@@ -33,7 +33,7 @@ class Endboss extends MoveableObject {
   otherDirection = false;
 
   /** Speed of the boss movement. @type {number} */
-  speed = 2;
+  speed = 3.5;
 
   /** Animation frames for alert state. @type {string[]} */
   IMAGES_ALERT = [
